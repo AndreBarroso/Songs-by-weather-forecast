@@ -69,5 +69,4 @@ public class ListaDeMusicas implements Serializable{
 		ListaDeMusicas other = (ListaDeMusicas) obj;
 		return Objects.equals(id, other.id);
 	}
-	
 }
