@@ -2,16 +2,24 @@ package com.andrebarroso.backend.entities;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class ChamadaPlayList implements Serializable{
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class ChamadasPlayList implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String cidade;
 	private Double temperatura;
 	private LocalDate dataDaChamada;
 	private String solicitante;
 	
-	public ChamadaPlayList(Long id, String cidade, double temperatura, LocalDate dataDaChamada, String solicitante) {
+	public ChamadasPlayList(Long id, String cidade, double temperatura, LocalDate dataDaChamada, String solicitante) {
 		this.id = id;
 		this.cidade = cidade;
 		this.temperatura = temperatura;

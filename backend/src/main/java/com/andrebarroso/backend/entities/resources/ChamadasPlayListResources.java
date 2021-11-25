@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.andrebarroso.backend.entities.ChamadaPlayList;
+import com.andrebarroso.backend.entities.ChamadasPlayList;
 
 @RestController
-@RequestMapping(value = "chamada")
-public class ChamadaPlayListResources {
+@RequestMapping(value = "chamadas")
+public class ChamadasPlayListResources {
 	
 	@GetMapping
-	public ResponseEntity<ChamadaPlayList> findAll() {
-		ChamadaPlayList list = new ChamadaPlayList(1L, "Belo Horizonte", 50.0, LocalDate.now(), "André");
+	public ResponseEntity<ChamadasPlayList> findAll() {
+		ChamadasPlayList list = new ChamadasPlayList(1L, "Belo Horizonte", 50.0, LocalDate.now(), "André");
 		return ResponseEntity.ok().body(list);
 	}
 	
