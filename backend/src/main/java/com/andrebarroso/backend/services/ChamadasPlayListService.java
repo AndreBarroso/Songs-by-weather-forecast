@@ -16,4 +16,8 @@ public class ChamadasPlayListService {
 	public List<ChamadasPlayList> findAll() {
 		return repository.findAll();
 	}
+	
+	public ChamadasPlayList insert(ChamadasPlayList obj) {
+		return repository.save(obj);
+	}
 }
