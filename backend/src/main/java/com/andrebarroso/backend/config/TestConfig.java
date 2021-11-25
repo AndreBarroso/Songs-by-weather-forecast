@@ -26,7 +26,7 @@ public class TestConfig implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		ListaDeMusicas l1 = new ListaDeMusicas(null, "Californication", "Rock", 1L);
+		ListaDeMusicas l1 = new ListaDeMusicas(null, "Californication", "Rockee", 1L);
 		ListaDeMusicas l2 = new ListaDeMusicas(null, "ByTheWay", "Rock", 2L);
 		
 		 ChamadasPlayList c1 = new ChamadasPlayList(null, "Belo Horizonte", 40.0, LocalDate.now(), "André");

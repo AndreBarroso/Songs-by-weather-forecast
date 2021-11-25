@@ -1,4 +1,4 @@
-package com.andrebarroso.backend.entities.resources;
+package com.andrebarroso.backend.resources;
 
 import java.time.LocalDate;
 
