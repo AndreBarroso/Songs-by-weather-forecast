@@ -16,5 +16,4 @@ public class ChamadasPlayListService {
 	public List<ChamadasPlayList> findAll() {
 		return repository.findAll();
 	}
-	
 }

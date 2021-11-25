@@ -1,11 +1,15 @@
 package com.andrebarroso.backend.entities;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class ChamadasPlayList implements Serializable{
@@ -18,6 +22,9 @@ public class ChamadasPlayList implements Serializable{
 	private Double temperatura;
 	private LocalDate dataDaChamada;
 	private String solicitante;
+	
+	@OneToMany(mappedBy = "playList")
+	private List<ListaDeMusicas> listaMusicas = new ArrayList<>();
 	
 	public ChamadasPlayList(Long id, String cidade, double temperatura, LocalDate dataDaChamada, String solicitante) {
 		this.id = id;
@@ -66,5 +73,27 @@ public class ChamadasPlayList implements Serializable{
 	public void setSolicitante(String solicitante) {
 		this.solicitante = solicitante;
 	}
+	
+	public List<ListaDeMusicas> getListaMusicas() {
+		return listaMusicas;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ChamadasPlayList other = (ChamadasPlayList) obj;
+		return Objects.equals(id, other.id);
+	}
+
 }
 

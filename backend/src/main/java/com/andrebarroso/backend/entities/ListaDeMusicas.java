@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class ListaDeMusicas implements Serializable{
@@ -17,7 +19,10 @@ public class ListaDeMusicas implements Serializable{
 	private Long id;
 	private String name;
 	private String estilo;
-	private long chamadaId;
+	
+	@ManyToOne
+	@JoinColumn(name = "chamada_id")
+	private ChamadasPlayList playList;
 	
 	public ListaDeMusicas() {
 	}
@@ -26,7 +31,6 @@ public class ListaDeMusicas implements Serializable{
 		this.id = id;
 		this.name = name;
 		this.estilo = estilo;
-		this.chamadaId = chamadaId;
 	}
 
 	public Long getId() {
@@ -51,14 +55,6 @@ public class ListaDeMusicas implements Serializable{
 
 	public void setEstilo(String estilo) {
 		this.estilo = estilo;
-	}
-
-	public long getChamadaId() {
-		return chamadaId;
-	}
-
-	public void setChamadaId(long chamadaId) {
-		this.chamadaId = chamadaId;
 	}
 
 	@Override
