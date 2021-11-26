@@ -1,6 +1,7 @@
 package com.andrebarroso.backend.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,5 +20,10 @@ public class ChamadasPlayListService {
 	
 	public ChamadasPlayList insert(ChamadasPlayList obj) {
 		return repository.save(obj);
+	}
+
+	public ChamadasPlayList findById(Long id) {
+		Optional <ChamadasPlayList> obj = repository.findById(id);
+		return obj.get();
 	}
 }

@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class ChamadasPlayList implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -23,6 +25,7 @@ public class ChamadasPlayList implements Serializable{
 	private Instant dataDaChamada;
 	private String solicitante;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "playList")
 	private List<ListaDeMusicas> listaMusicas = new ArrayList<>();
 	
