@@ -57,16 +57,6 @@ public class ListaDeMusicas implements Serializable{
 	public void setEstilo(String estilo) {
 		this.estilo = estilo;
 	}
-	
-	
-
-	public ChamadasPlayList getPlayList() {
-		return playList;
-	}
-
-	public void setPlayList(ChamadasPlayList playList) {
-		this.playList = playList;
-	}
 
 	@Override
 	public int hashCode() {

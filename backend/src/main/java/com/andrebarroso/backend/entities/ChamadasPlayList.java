@@ -1,7 +1,6 @@
 package com.andrebarroso.backend.entities;
 import java.io.Serializable;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -26,6 +25,9 @@ public class ChamadasPlayList implements Serializable{
 	
 	@OneToMany(mappedBy = "playList")
 	private List<ListaDeMusicas> listaMusicas = new ArrayList<>();
+	
+	public ChamadasPlayList() {
+	}
 	
 	public ChamadasPlayList(Long id, String cidade, double temperatura, Instant dataDaChamada, String solicitante) {
 		this.id = id;
