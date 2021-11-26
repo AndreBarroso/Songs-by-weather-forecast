@@ -26,12 +26,15 @@ public class TestConfig implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		ListaDeMusicas l1 = new ListaDeMusicas(null, "Californication", "Rockee", 1L);
-		ListaDeMusicas l2 = new ListaDeMusicas(null, "ByTheWay", "Rock", 2L);
 		
 		 ChamadasPlayList c1 = new ChamadasPlayList(null, "Belo Horizonte", 40.0, Instant.now(), "André");
 		 ChamadasPlayList c2 = new ChamadasPlayList(null, "Porto Alegre", 5.0, Instant.now(), "Pedro");
-		 listaDeMusicasRepository.saveAll(Arrays.asList(l1, l2));
+		 
+		 ListaDeMusicas l1 = new ListaDeMusicas(null, "Californication", "Rockee", 1L, c1);
+		 ListaDeMusicas l2 = new ListaDeMusicas(null, "ByTheWay", "Rock", 2L, c1);
+		 
 		 chamadaPlayListRespository.saveAll(Arrays.asList(c1, c2));
+		 listaDeMusicasRepository.saveAll(Arrays.asList(l1, l2));
+		 
 	}
 }
