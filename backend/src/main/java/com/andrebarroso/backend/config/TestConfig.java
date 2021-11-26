@@ -1,6 +1,6 @@
 package com.andrebarroso.backend.config;
 
-import java.time.LocalDate;
+import java.time.Instant;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +29,8 @@ public class TestConfig implements CommandLineRunner{
 		ListaDeMusicas l1 = new ListaDeMusicas(null, "Californication", "Rockee", 1L);
 		ListaDeMusicas l2 = new ListaDeMusicas(null, "ByTheWay", "Rock", 2L);
 		
-		 ChamadasPlayList c1 = new ChamadasPlayList(null, "Belo Horizonte", 40.0, LocalDate.now(), "André");
-		 ChamadasPlayList c2 = new ChamadasPlayList(null, "Porto Alegre", 5.0, LocalDate.now(), "Pedro");
+		 ChamadasPlayList c1 = new ChamadasPlayList(null, "Belo Horizonte", 40.0, Instant.now(), "André");
+		 ChamadasPlayList c2 = new ChamadasPlayList(null, "Porto Alegre", 5.0, Instant.now(), "Pedro");
 		 listaDeMusicasRepository.saveAll(Arrays.asList(l1, l2));
 		 chamadaPlayListRespository.saveAll(Arrays.asList(c1, c2));
 	}

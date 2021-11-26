@@ -1,5 +1,6 @@
 package com.andrebarroso.backend.entities;
 import java.io.Serializable;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,13 +21,13 @@ public class ChamadasPlayList implements Serializable{
 	private Long id;
 	private String cidade;
 	private Double temperatura;
-	private LocalDate dataDaChamada;
+	private Instant dataDaChamada;
 	private String solicitante;
 	
 	@OneToMany(mappedBy = "playList")
 	private List<ListaDeMusicas> listaMusicas = new ArrayList<>();
 	
-	public ChamadasPlayList(Long id, String cidade, double temperatura, LocalDate dataDaChamada, String solicitante) {
+	public ChamadasPlayList(Long id, String cidade, double temperatura, Instant dataDaChamada, String solicitante) {
 		this.id = id;
 		this.cidade = cidade;
 		this.temperatura = temperatura;
@@ -58,11 +59,11 @@ public class ChamadasPlayList implements Serializable{
 		this.temperatura = temperatura;
 	}
 
-	public LocalDate getDataDaChamada() {
+	public Instant getDataDaChamada() {
 		return dataDaChamada;
 	}
 
-	public void setDataDaChamada(LocalDate dataDaChamada) {
+	public void setDataDaChamada(Instant dataDaChamada) {
 		this.dataDaChamada = dataDaChamada;
 	}
 
