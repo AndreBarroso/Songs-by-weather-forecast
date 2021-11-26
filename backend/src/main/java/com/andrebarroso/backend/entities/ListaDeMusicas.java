@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class ListaDeMusicas implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -20,6 +22,7 @@ public class ListaDeMusicas implements Serializable{
 	private String name;
 	private String estilo;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "chamada_id")
 	private ChamadasPlayList playList;

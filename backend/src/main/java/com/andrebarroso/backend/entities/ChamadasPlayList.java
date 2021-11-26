@@ -25,7 +25,6 @@ public class ChamadasPlayList implements Serializable{
 	private Instant dataDaChamada;
 	private String solicitante;
 	
-	@JsonIgnore
 	@OneToMany(mappedBy = "playList")
 	private List<ListaDeMusicas> listaMusicas = new ArrayList<>();
 	
