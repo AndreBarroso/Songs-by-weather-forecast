@@ -30,7 +30,7 @@ public class TestConfig implements CommandLineRunner{
 		 ChamadasPlayList c1 = new ChamadasPlayList(null, "Belo Horizonte", 40.0, Instant.now(), "André");
 		 ChamadasPlayList c2 = new ChamadasPlayList(null, "Porto Alegre", 5.0, Instant.now(), "Pedro");
 		 
-		 ListaDeMusicas l1 = new ListaDeMusicas(null, "Californication", "Rockee", 1L, c1);
+		 ListaDeMusicas l1 = new ListaDeMusicas(null, "Californication", "Rock", 1L, c1);
 		 ListaDeMusicas l2 = new ListaDeMusicas(null, "ByTheWay", "Rock", 2L, c1);
 		 
 		 chamadaPlayListRespository.saveAll(Arrays.asList(c1, c2));
