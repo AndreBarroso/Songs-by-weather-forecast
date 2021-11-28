@@ -16,7 +16,8 @@ import reactor.core.publisher.Mono;
 
 @Service
 public class ChamadasPlayListService {
-	public double temp;
+	private String URLBase = "https://api.openweathermap.org/data/2.5/weather?q=";
+	private String apiTempToken = "&appid=dc883dd38174c35149a5d7d336f5ff65";
 	
 	@Autowired
 	private WebClient webClient;
@@ -29,9 +30,7 @@ public class ChamadasPlayListService {
 	}
 	
 	public ChamadasPlayList insert(ChamadasPlayList obj) {
-		temp = getCurrentTemperature();
-		
-		obj.setTemperatura(getCurrentTemperature());
+		obj.setTemperatura(getCurrentTemperature("London"));
 		
 		return repository.save(obj);
 	}
@@ -41,11 +40,11 @@ public class ChamadasPlayListService {
 		return obj.get();
 	}
 	
-	
-	private Double getCurrentTemperature() {
+	private Double getCurrentTemperature(String city) {
+		
 		Mono<openweathermapResponse> apiData = this.webClient.
 		method(HttpMethod.GET)
-		.uri("https://api.openweathermap.org/data/2.5/weather?q=London&appid=dc883dd38174c35149a5d7d336f5ff65")
+		.uri(URLBase + city + apiTempToken)
 		.retrieve()
 		.bodyToMono(openweathermapResponse.class);
 		

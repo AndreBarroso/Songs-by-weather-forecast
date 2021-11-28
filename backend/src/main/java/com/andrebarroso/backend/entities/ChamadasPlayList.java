@@ -106,7 +106,5 @@ public class ChamadasPlayList implements Serializable{
 				+ dataDaChamada + ", solicitante=" + solicitante + "]";
 	}
 	
-	
-
 }
 

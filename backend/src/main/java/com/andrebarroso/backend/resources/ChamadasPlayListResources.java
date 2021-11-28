@@ -26,9 +26,6 @@ import reactor.core.publisher.Mono;
 public class ChamadasPlayListResources {
 
 	@Autowired
-	private WebClient webClient;
-	
-	@Autowired
 	private ChamadasPlayListService service;
 	
 	@GetMapping
