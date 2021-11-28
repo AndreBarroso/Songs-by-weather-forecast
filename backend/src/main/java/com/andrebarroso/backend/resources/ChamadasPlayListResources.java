@@ -24,6 +24,7 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping(value = "/chamadas")
 public class ChamadasPlayListResources {
+	public double temp;
 
 	@Autowired
 	private WebClient webClient;
@@ -45,7 +46,11 @@ public class ChamadasPlayListResources {
 	
 	@PostMapping
 	public ResponseEntity<ChamadasPlayList> insert(@RequestBody ChamadasPlayList obj) {
-		getCurrentTemperature();
+		temp = getCurrentTemperature();
+		
+		obj.setTemperatura(getCurrentTemperature());
+		
+		System.out.println(obj);
 		obj = service.insert(obj);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -61,7 +66,7 @@ public class ChamadasPlayListResources {
 		.bodyToMono(openweathermapResponse.class);
 		
 		openweathermapResponse temperature = apiData.block();
-			
+		
 		return temperature.getTemp();
 	}
 }

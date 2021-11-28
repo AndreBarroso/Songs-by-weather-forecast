@@ -100,5 +100,13 @@ public class ChamadasPlayList implements Serializable{
 		return Objects.equals(id, other.id);
 	}
 
+	@Override
+	public String toString() {
+		return "ChamadasPlayList [id=" + id + ", cidade=" + cidade + ", temperatura=" + temperatura + ", dataDaChamada="
+				+ dataDaChamada + ", solicitante=" + solicitante + "]";
+	}
+	
+	
+
 }
 

@@ -8,9 +8,7 @@ public class openweathermapResponse {
 	private String mainString;
 	private String tempString;
 	private Double tempCelcius;
-	private String base;
-	String[] ab;
-	private String teste2;
+
 	
 	public String getTempKelvin() {
 		mainString = main.toString();
