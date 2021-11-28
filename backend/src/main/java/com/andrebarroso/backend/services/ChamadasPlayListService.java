@@ -11,6 +11,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import com.andrebarroso.backend.entities.ChamadasPlayList;
 import com.andrebarroso.backend.repositories.ChamadasPlayListRepository;
 import com.andrebarroso.backend.responses.openweathermapResponse;
+import com.andrebarroso.backend.services.exceptions.ResourceNotFoundException;
 
 import reactor.core.publisher.Mono;
 
@@ -18,6 +19,8 @@ import reactor.core.publisher.Mono;
 public class ChamadasPlayListService {
 	private String URLBase = "https://api.openweathermap.org/data/2.5/weather?q=";
 	private String apiTempToken = "&appid=dc883dd38174c35149a5d7d336f5ff65";
+	private Object responsePost;
+	private Double temp;
 	
 	@Autowired
 	private WebClient webClient;
@@ -30,10 +33,15 @@ public class ChamadasPlayListService {
 	}
 	
 	public ChamadasPlayList insert(ChamadasPlayList obj) {
-		
-		obj.setTemperatura(getCurrentTemperature(obj.getCidade()));
-		
-		return repository.save(obj);
+		try {
+			temp = getCurrentTemperature(obj.getCidade());
+			obj.setTemperatura(temp);
+			responsePost = repository.save(obj);
+			return repository.save(obj);
+			}
+			catch(Exception e) {
+			  throw new ResourceNotFoundException(obj.getCidade());
+			}
 	}
 
 	public ChamadasPlayList findById(Long id) {
@@ -52,5 +60,6 @@ public class ChamadasPlayListService {
 		openweathermapResponse temperature = apiData.block();
 		
 		return temperature.getTemp();
+		
 	}
 }
