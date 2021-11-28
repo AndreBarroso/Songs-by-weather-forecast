@@ -30,7 +30,8 @@ public class ChamadasPlayListService {
 	}
 	
 	public ChamadasPlayList insert(ChamadasPlayList obj) {
-		obj.setTemperatura(getCurrentTemperature("London"));
+		
+		obj.setTemperatura(getCurrentTemperature(obj.getCidade()));
 		
 		return repository.save(obj);
 	}
