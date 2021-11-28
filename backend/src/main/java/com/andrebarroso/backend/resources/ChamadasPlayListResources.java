@@ -24,7 +24,7 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping(value = "/chamadas")
 public class ChamadasPlayListResources {
-	
+
 	@Autowired
 	private WebClient webClient;
 	
@@ -45,7 +45,7 @@ public class ChamadasPlayListResources {
 	
 	@PostMapping
 	public ResponseEntity<ChamadasPlayList> insert(@RequestBody ChamadasPlayList obj) {
-		getForecast();
+		getCurrentTemperature();
 		obj = service.insert(obj);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -53,23 +53,15 @@ public class ChamadasPlayListResources {
 		return ResponseEntity.created(uri).body(obj);
 	}
 	
-	private Double getForecast() {
+	private Double getCurrentTemperature() {
 		Mono<openweathermapResponse> apiData = this.webClient.
 		method(HttpMethod.GET)
 		.uri("https://api.openweathermap.org/data/2.5/weather?q=London&appid=dc883dd38174c35149a5d7d336f5ff65")
 		.retrieve()
 		.bodyToMono(openweathermapResponse.class);
 		
-//		apiData.subscribe( p -> {
-//			System.out.println("finalizou a requisição");
-//		});
-		
-		openweathermapResponse teste = apiData.block();
-		
-		
-		
-		System.out.println(teste);
-		System.out.println("testooooooou");
-		return 33.3;
+		openweathermapResponse temperature = apiData.block();
+			
+		return temperature.getTemp();
 	}
 }
