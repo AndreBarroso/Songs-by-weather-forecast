@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.andrebarroso.backend.entities.ChamadasPlayList;
+import com.andrebarroso.backend.entities.ListaDeMusicas;
 import com.andrebarroso.backend.repositories.ChamadasPlayListRepository;
+import com.andrebarroso.backend.repositories.ListaDeMusicasRespository;
 import com.andrebarroso.backend.responses.openweathermapResponse;
 import com.andrebarroso.backend.responses.spotfyResponse;
 import com.andrebarroso.backend.services.exceptions.ResourceNotFoundException;
@@ -28,14 +30,18 @@ public class ChamadasPlayListService {
 	private String URLSpotifyInitBase = "https://api.spotify.com/v1/playlists/";
 	private String URLSpotifyFinalBase = "/tracks?limit=20";
 	private String typeMusic;
-	private String autorization = "Bearer BQChIznT25c45R3Wbfa1amO2nsNwTkSuVsMKUak-tlNhasWuaUH6nYF002lRMqy8y9A0NfRVF04Cr5SQX--lMCC82WGFxKSamMeHF4_E3qft4ogOmZSw93tTDVaym9x2I9qgb3Z_k_Y6SatBhg";
+	private String autorization = "Bearer BQD0yeFh8TUo5UOJ8ry5UIX6xZHaG2Fc6veMtGrhvO6zWDNIHgQflvbQLqfZEybn4RsjOeE7JF7ekD9bbbA8RiBdRZIgmp-pI-OxcsToSFk6KTFZqxr2C-R7aXNk7qijPP_hIglcA8u-nUr4ag";
 	private List <String> list = new ArrayList();
+	private ListaDeMusicas musicaNova;
 
 	@Autowired
 	private WebClient webClient;
 	
 	@Autowired
 	private ChamadasPlayListRepository repository;
+	
+	@Autowired
+	private ListaDeMusicasRespository listaRepository;
 	
 	public List<ChamadasPlayList> findAll() {
 		return repository.findAll();
@@ -44,10 +50,13 @@ public class ChamadasPlayListService {
 	public ChamadasPlayList insert(ChamadasPlayList obj) {
 		try {
 			temp = getCurrentTemperature(obj.getCidade());
-			getTracks("37i9dQZF1DXa2PvUpywmrr");
 			obj.setTemperatura(temp);
 			obj.setDataDaChamada(Instant.now());
 			responsePost = repository.save(obj);
+			
+			musicaNova = getTracks("37i9dQZF1DXa2PvUpywmrr", obj);
+			listaRepository.save(musicaNova);
+			
 			return repository.save(obj);
 			}
 			catch(Exception e) {
@@ -73,7 +82,8 @@ public class ChamadasPlayListService {
 		return temperature.getTemp();
 	}
 	
-	private List getTracks(String typeOfSongs) {
+	private ListaDeMusicas getTracks(String typeOfSongs, ChamadasPlayList obj) {
+	
 		typeMusic = "37i9dQZF1DXa2PvUpywmrr";
 		
 		Mono<spotfyResponse> apiData = this.webClient.
@@ -89,6 +99,9 @@ public class ChamadasPlayListService {
 		list.add(l.getAlbum());
 		list.add(l.getArtist());
 		
+		ListaDeMusicas musica = new ListaDeMusicas(null, l.getSong(), "festa", l.getAlbum(), l.getArtist(), obj);
+//		(Long id, String name, String estilo, long chamadaId, ChamadasPlayList playList)
+		
 		
 		System.out.println(list);
 //		System.out.println(l.getTrack());
@@ -96,6 +109,6 @@ public class ChamadasPlayListService {
 //		System.out.println(l.getArtist());
 //		System.out.println(l.getSong());
 		
-		return list;
+		return musica;
 	}
 }

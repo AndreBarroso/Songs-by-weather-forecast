@@ -32,10 +32,12 @@ public class ListaDeMusicas implements Serializable{
 	public ListaDeMusicas() {
 	}
 
-	public ListaDeMusicas(Long id, String name, String estilo, long chamadaId, ChamadasPlayList playList) {
+	public ListaDeMusicas(Long id, String name, String estilo, String album, String artista,ChamadasPlayList playList) {
 		this.id = id;
 		this.name = name;
 		this.estilo = estilo;
+		this.album = album;
+		this.artista = artista;
 		this.playList = playList;
 	}
 
@@ -61,6 +63,22 @@ public class ListaDeMusicas implements Serializable{
 
 	public void setEstilo(String estilo) {
 		this.estilo = estilo;
+	}
+
+	public String getAlbum() {
+		return album;
+	}
+
+	public void setAlbum(String album) {
+		this.album = album;
+	}
+
+	public String getArtista() {
+		return artista;
+	}
+
+	public void setArtista(String artista) {
+		this.artista = artista;
 	}
 
 	@Override
