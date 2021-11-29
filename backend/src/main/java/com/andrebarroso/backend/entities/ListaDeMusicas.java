@@ -21,6 +21,8 @@ public class ListaDeMusicas implements Serializable{
 	private Long id;
 	private String name;
 	private String estilo;
+	private String album;
+	private String artista;
 	
 	@JsonIgnore
 	@ManyToOne

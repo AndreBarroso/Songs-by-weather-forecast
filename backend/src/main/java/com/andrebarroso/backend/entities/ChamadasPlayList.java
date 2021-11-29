@@ -1,8 +1,13 @@
 package com.andrebarroso.backend.entities;
+
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -11,12 +16,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
-public class ChamadasPlayList implements Serializable{
+public class ChamadasPlayList implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -24,13 +27,13 @@ public class ChamadasPlayList implements Serializable{
 	private Double temperatura;
 	private Instant dataDaChamada;
 	private String solicitante;
-	
+
 	@OneToMany(mappedBy = "playList")
 	private List<ListaDeMusicas> listaMusicas = new ArrayList<>();
-	
+
 	public ChamadasPlayList() {
 	}
-	
+
 	public ChamadasPlayList(Long id, String cidade, double temperatura, Instant dataDaChamada, String solicitante) {
 		this.id = id;
 		this.cidade = cidade;
@@ -78,7 +81,7 @@ public class ChamadasPlayList implements Serializable{
 	public void setSolicitante(String solicitante) {
 		this.solicitante = solicitante;
 	}
-	
+
 	public List<ListaDeMusicas> getListaMusicas() {
 		return listaMusicas;
 	}
@@ -105,6 +108,4 @@ public class ChamadasPlayList implements Serializable{
 		return "ChamadasPlayList [id=" + id + ", cidade=" + cidade + ", temperatura=" + temperatura + ", dataDaChamada="
 				+ dataDaChamada + ", solicitante=" + solicitante + "]";
 	}
-	
 }
-
