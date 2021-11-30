@@ -30,7 +30,7 @@ public class ChamadasPlayListService {
 	private String URLSpotifyInitBase = "https://api.spotify.com/v1/playlists/";
 	private String URLSpotifyFinalBase = "/tracks?limit=20";
 	private String typeMusic;
-	private String autorization = "Bearer BQD0yeFh8TUo5UOJ8ry5UIX6xZHaG2Fc6veMtGrhvO6zWDNIHgQflvbQLqfZEybn4RsjOeE7JF7ekD9bbbA8RiBdRZIgmp-pI-OxcsToSFk6KTFZqxr2C-R7aXNk7qijPP_hIglcA8u-nUr4ag";
+	private String autorization = "Bearer BQC8iIwuKAzsFj-t27fm6zPJ5m0jKpwxwOr52gnB_-_A9vtod-iv8q35ATkdUGE25a2jnqCWBjFhoj8MmsCzCC8VhPiiv2MuLBUjOU-VZsZNWuV_lPj5V9pokTHxuXdM4bN5pF_uwQh-B6Qygg";
 	private List <String> list = new ArrayList();
 	private ListaDeMusicas musicaNova;
 
@@ -54,9 +54,8 @@ public class ChamadasPlayListService {
 			obj.setDataDaChamada(Instant.now());
 			responsePost = repository.save(obj);
 			
-			musicaNova = getTracks("37i9dQZF1DXa2PvUpywmrr", obj);
-			listaRepository.save(musicaNova);
-			
+			getTracks("37i9dQZF1DXa2PvUpywmrr", obj);
+
 			return repository.save(obj);
 			}
 			catch(Exception e) {
@@ -82,7 +81,7 @@ public class ChamadasPlayListService {
 		return temperature.getTemp();
 	}
 	
-	private ListaDeMusicas getTracks(String typeOfSongs, ChamadasPlayList obj) {
+	private void getTracks(String typeOfSongs, ChamadasPlayList obj) {
 	
 		typeMusic = "37i9dQZF1DXa2PvUpywmrr";
 		
@@ -94,21 +93,10 @@ public class ChamadasPlayListService {
 		.bodyToMono(spotfyResponse.class);
 		
 		spotfyResponse l = apiData.block();
-		
-		list.add(l.getSong());
-		list.add(l.getAlbum());
-		list.add(l.getArtist());
-		
+
 		ListaDeMusicas musica = new ListaDeMusicas(null, l.getSong(), "festa", l.getAlbum(), l.getArtist(), obj);
-//		(Long id, String name, String estilo, long chamadaId, ChamadasPlayList playList)
+
 		
-		
-		System.out.println(list);
-//		System.out.println(l.getTrack());
-//		System.out.println(l.getAlbum());
-//		System.out.println(l.getArtist());
-//		System.out.println(l.getSong());
-		
-		return musica;
+		listaRepository.save(musica);
 	}
 }
