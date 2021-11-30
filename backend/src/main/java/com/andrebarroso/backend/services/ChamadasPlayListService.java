@@ -2,6 +2,7 @@ package com.andrebarroso.backend.services;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,7 @@ import com.andrebarroso.backend.repositories.ChamadasPlayListRepository;
 import com.andrebarroso.backend.repositories.ListaDeMusicasRespository;
 import com.andrebarroso.backend.responses.openweathermapResponse;
 import com.andrebarroso.backend.responses.spotfyResponse;
+import com.andrebarroso.backend.responses.spotifyTokenReponse;
 import com.andrebarroso.backend.services.exceptions.ResourceNotFoundException;
 
 import reactor.core.publisher.Mono;
@@ -30,7 +32,7 @@ public class ChamadasPlayListService {
 	private String URLSpotifyInitBase = "https://api.spotify.com/v1/playlists/";
 	private String URLSpotifyFinalBase = "/tracks?limit=20";
 	private String typeMusic;
-	private String autorization = "Bearer BQC8iIwuKAzsFj-t27fm6zPJ5m0jKpwxwOr52gnB_-_A9vtod-iv8q35ATkdUGE25a2jnqCWBjFhoj8MmsCzCC8VhPiiv2MuLBUjOU-VZsZNWuV_lPj5V9pokTHxuXdM4bN5pF_uwQh-B6Qygg";
+	private String autorization = "Bearer BQAIHOvqtO3FXMdm8pQFial-WZFqddGk3-ASik-UtjfNCToQSyD0l6ZmSbRCRuUgWrfbSb1WQZRqUu1zbTSuTqgcfcizlejX1HDfkRnm25yf-hA4vrOsXP-MzghXRgGbTLjVW7tZWV0rtPbEoA";
 	private List <String> list = new ArrayList();
 	private ListaDeMusicas musicaNova;
 	private List testa;
@@ -82,6 +84,27 @@ public class ChamadasPlayListService {
 		return temperature.getTemp();
 	}
 	
+//	public void getSpotfyToken () {
+//		String clientID‌ = "4e8d12ac54234d9091767fdf7890e974";
+//		String clientSecret = "f4aa7c2387364f978442b3ed3c46b91e";
+//		String stringToEncode = clientID‌ + ":" + clientSecret;
+//        String base64Code = Base64.getEncoder().encodeToString(stringToEncode.getBytes());
+//
+//        System.out.println("Texto em Base64: " + base64Code);
+//		
+//		Mono<spotifyTokenReponse> apiData = this.webClient.
+//		method(HttpMethod.POST)
+//		.uri("https://accounts.spotify.com/api/token")
+//		.header(HttpHeaders.CONTENT_TYPE, "application/x-www-form-urlencoded")
+//		.header(HttpHeaders.AUTHORIZATION, "Basic " + base64Code)
+//		.retrieve()
+//		.bodyToMono(spotifyTokenReponse.class);
+//		
+//		spotifyTokenReponse l = apiData.block();
+//		
+//		System.out.println("Deu certo: " + l);
+//	}
+	
 	private void getTracks(String typeOfSongs, ChamadasPlayList obj) {
 	
 		typeMusic = "37i9dQZF1DXa2PvUpywmrr";
@@ -95,15 +118,12 @@ public class ChamadasPlayListService {
 		
 		spotfyResponse l = apiData.block();
 		
-		
+//		getSpotfyToken();
 		
 		for(int i = 0; i < l.getItems().size(); i ++ ) {
 			ListaDeMusicas musica = new ListaDeMusicas(null, l.getSong(i), "festa", l.getAlbum(i), l.getArtist(i), obj);
 
 			listaRepository.save(musica);
-			
 		}
-
-
 	}
 }
