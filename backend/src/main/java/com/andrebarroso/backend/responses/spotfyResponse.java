@@ -21,29 +21,29 @@ public class spotfyResponse {
 		return items; 
 	}
 	
-	public String getTrack() {
-        item = items.get(0).toString();
+	public String getTrack(int i) {
+        item = items.get(i).toString();
 		return item.substring(item.indexOf("track"), item.indexOf("uri=spotify:track:"));
 	}
 	
-	public String getAlbum() {
-		String t = getTrack();
+	public String getAlbum(int i) {
+		String t = getTrack(i);
 		String wordToDiscartCharacter = t.substring(t.indexOf("], name="));
 		album = wordToDiscartCharacter
 				.substring(wordToDiscartCharacter.indexOf("=") + 1,wordToDiscartCharacter.indexOf("release") - 2);
 		return album;
 	}
 	
-	public String getArtist() {
-		String t = getTrack();
+	public String getArtist(int i) {
+		String t = getTrack(i);
 		String wordToDiscartCharacter = t.substring(t.indexOf("artists"));
 		artist = wordToDiscartCharacter
 				.substring(wordToDiscartCharacter.indexOf("name") + 5, wordToDiscartCharacter.indexOf("type") - 2);
 		return artist;
 	}
 	
-	public String getSong() {
-		String t = getTrack();
+	public String getSong(int i) {
+		String t = getTrack(i);
 		String wordToDiscartCharacter = t.substring(t.indexOf("is_local"));
 		song = wordToDiscartCharacter
 				.substring(wordToDiscartCharacter.indexOf("name") + 5, wordToDiscartCharacter.indexOf("popularity") - 2);

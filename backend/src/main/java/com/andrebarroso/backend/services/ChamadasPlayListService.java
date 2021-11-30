@@ -33,6 +33,7 @@ public class ChamadasPlayListService {
 	private String autorization = "Bearer BQC8iIwuKAzsFj-t27fm6zPJ5m0jKpwxwOr52gnB_-_A9vtod-iv8q35ATkdUGE25a2jnqCWBjFhoj8MmsCzCC8VhPiiv2MuLBUjOU-VZsZNWuV_lPj5V9pokTHxuXdM4bN5pF_uwQh-B6Qygg";
 	private List <String> list = new ArrayList();
 	private ListaDeMusicas musicaNova;
+	private List testa;
 
 	@Autowired
 	private WebClient webClient;
@@ -93,9 +94,16 @@ public class ChamadasPlayListService {
 		.bodyToMono(spotfyResponse.class);
 		
 		spotfyResponse l = apiData.block();
+		
+		
+		
+		for(int i = 0; i < l.getItems().size(); i ++ ) {
+			ListaDeMusicas musica = new ListaDeMusicas(null, l.getSong(i), "festa", l.getAlbum(i), l.getArtist(i), obj);
 
-		ListaDeMusicas musica = new ListaDeMusicas(null, l.getSong(), "festa", l.getAlbum(), l.getArtist(), obj);
+			listaRepository.save(musica);
+			
+		}
 
-		listaRepository.save(musica);
+
 	}
 }
