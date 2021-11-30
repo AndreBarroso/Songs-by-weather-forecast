@@ -86,7 +86,7 @@ public class ChamadasPlayListService {
 	
 //	public void getSpotfyToken () {
 //		String clientID‌ = "4e8d12ac54234d9091767fdf7890e974";
-//		String clientSecret = "f4aa7c2387364f978442b3ed3c46b91e";
+//		String clientSecret = "meu secret";
 //		String stringToEncode = clientID‌ + ":" + clientSecret;
 //        String base64Code = Base64.getEncoder().encodeToString(stringToEncode.getBytes());
 //
