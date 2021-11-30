@@ -96,7 +96,6 @@ public class ChamadasPlayListService {
 
 		ListaDeMusicas musica = new ListaDeMusicas(null, l.getSong(), "festa", l.getAlbum(), l.getArtist(), obj);
 
-		
 		listaRepository.save(musica);
 	}
 }
