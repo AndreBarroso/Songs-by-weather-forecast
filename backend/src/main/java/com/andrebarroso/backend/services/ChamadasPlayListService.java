@@ -2,7 +2,6 @@ package com.andrebarroso.backend.services;
 
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,8 +16,8 @@ import com.andrebarroso.backend.entities.ListaDeMusicas;
 import com.andrebarroso.backend.repositories.ChamadasPlayListRepository;
 import com.andrebarroso.backend.repositories.ListaDeMusicasRespository;
 import com.andrebarroso.backend.responses.openweathermapResponse;
+import com.andrebarroso.backend.responses.playListResponse;
 import com.andrebarroso.backend.responses.spotfyResponse;
-import com.andrebarroso.backend.responses.spotifyTokenReponse;
 import com.andrebarroso.backend.services.exceptions.ResourceNotFoundException;
 
 import reactor.core.publisher.Mono;
@@ -32,10 +31,11 @@ public class ChamadasPlayListService {
 	private String URLSpotifyInitBase = "https://api.spotify.com/v1/playlists/";
 	private String URLSpotifyFinalBase = "/tracks?limit=20";
 	private String typeMusic;
-	private String autorization = "Bearer BQAIHOvqtO3FXMdm8pQFial-WZFqddGk3-ASik-UtjfNCToQSyD0l6ZmSbRCRuUgWrfbSb1WQZRqUu1zbTSuTqgcfcizlejX1HDfkRnm25yf-hA4vrOsXP-MzghXRgGbTLjVW7tZWV0rtPbEoA";
+	private String autorization = "Bearer BQCo5-8eu98BkKNcSzT_NG5qymG_1kVChZhmZrUFU9U36XNUw16VbKR9G-UtxKsO-HwYSPcmTIhEus-j9PJLBdsZqsMZoUNnhUh3gWkg16nJJKINaxLi9QPf9xXOWHDw-65EWWA_wu4_6eF-KQ";
 	private List <String> list = new ArrayList();
 	private ListaDeMusicas musicaNova;
 	private List testa;
+	private ChamadasPlayList response;
 
 	@Autowired
 	private WebClient webClient;
@@ -58,8 +58,12 @@ public class ChamadasPlayListService {
 			responsePost = repository.save(obj);
 			
 			getTracks("37i9dQZF1DXa2PvUpywmrr", obj);
-
-			return repository.save(obj);
+			
+			response = repository.save(obj);
+			
+			playListSugestion(obj.getId());      
+			return response;
+	
 			}
 			catch(Exception e) {
 			  throw new ResourceNotFoundException(obj.getCidade());
@@ -82,6 +86,24 @@ public class ChamadasPlayListService {
 		openweathermapResponse temperature = apiData.block();
 		
 		return temperature.getTemp();
+	}
+	
+	private playListResponse playListSugestion(Long idRequest) {
+		System.out.println("ooooooooooooooooooooooooo");  
+
+		Mono<playListResponse> apiData = this.webClient.
+		method(HttpMethod.GET)
+		.uri("http://localhost:8080/chamadas/{idRequest}", idRequest)
+		.retrieve()
+		.bodyToMono(playListResponse.class);
+		
+		System.out.println("teeeeeeeeeeestou111");
+		
+		playListResponse obj = apiData.block();
+	
+		System.out.println(obj.getListaMusicas());
+		
+		return obj;
 	}
 	
 //	public void getSpotfyToken () {
