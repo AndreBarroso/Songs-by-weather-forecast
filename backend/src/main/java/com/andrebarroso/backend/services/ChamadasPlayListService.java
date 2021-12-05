@@ -30,11 +30,7 @@ public class ChamadasPlayListService {
 	private Double temp;
 	private String URLSpotifyInitBase = "https://api.spotify.com/v1/playlists/";
 	private String URLSpotifyFinalBase = "/tracks?limit=20";
-	private String typeMusic;
-	private String autorization = "Bearer BQBf5QGveCX-aifudd9gzyz91yNW3yQYYBhFspYE_lqWA0-HOIv6iztC-CbN0kDKJVQsQCMBzpmAoAuWJh7In4kbNhRAh_GDlOrTWN4UTvMqp5p5PgyZ0Csieed8QLCo_WSLFSOdUiuZez70Xg";
-	private List <String> list = new ArrayList();
-	private ListaDeMusicas musicaNova;
-	private List testa;
+	private String autorization = "Bearer BQAQ8HRIAu3FiaN7Xj5M-WXsWXBwMmELx0RulXPoM2e1nfmPrD0JgdGXTRmujBdPbFkfGgufs_CY39Dzjz7famdB3Rubg-wzsyvaCfkFxryvqrKPFee4UdM4GGRxPw39W1WjT4Ng7O9o77pqeQ";
 	private ChamadasPlayList response;
 
 	@Autowired
@@ -84,53 +80,21 @@ public class ChamadasPlayListService {
 		.bodyToMono(openweathermapResponse.class);
 		
 		openweathermapResponse temperature = apiData.block();
-		
 		return temperature.getTemp();
 	}
 	
 	private playListResponse playListSugestion(Long idRequest) {
-		System.out.println("ooooooooooooooooooooooooo");  
-
 		Mono<playListResponse> apiData = this.webClient.
 		method(HttpMethod.GET)
 		.uri("http://localhost:8080/chamadas/{idRequest}", idRequest)
 		.retrieve()
 		.bodyToMono(playListResponse.class);
-		
-		System.out.println("teeeeeeeeeeestou111");
-		
 		playListResponse obj = apiData.block();
-	
-		System.out.println(obj.getListaMusicas());
-		
 		return obj;
 	}
 	
-//	public void getSpotfyToken () {
-//		String clientID‌ = "4e8d12ac54234d9091767fdf7890e974";
-//		String clientSecret = "meu secret";
-//		String stringToEncode = clientID‌ + ":" + clientSecret;
-//        String base64Code = Base64.getEncoder().encodeToString(stringToEncode.getBytes());
-//
-//        System.out.println("Texto em Base64: " + base64Code);
-//		
-//		Mono<spotifyTokenReponse> apiData = this.webClient.
-//		method(HttpMethod.POST)
-//		.uri("https://accounts.spotify.com/api/token")
-//		.header(HttpHeaders.CONTENT_TYPE, "application/x-www-form-urlencoded")
-//		.header(HttpHeaders.AUTHORIZATION, "Basic " + base64Code)
-//		.retrieve()
-//		.bodyToMono(spotifyTokenReponse.class);
-//		
-//		spotifyTokenReponse l = apiData.block();
-//		
-//		System.out.println("Deu certo: " + l);
-//	}
-	
 	private void getTracks(String typeOfSongs, ChamadasPlayList obj) {
-	
-		typeMusic = "37i9dQZF1DXa2PvUpywmrr";
-		
+
 		Mono<spotfyResponse> apiData = this.webClient.
 		method(HttpMethod.GET)
 		.uri(URLSpotifyInitBase + typeOfSongs + URLSpotifyFinalBase)
@@ -139,8 +103,6 @@ public class ChamadasPlayListService {
 		.bodyToMono(spotfyResponse.class);
 		
 		spotfyResponse l = apiData.block();
-		
-//		getSpotfyToken();
 		
 		for(int i = 0; i < l.getItems().size(); i ++ ) {
 			ListaDeMusicas musica = new ListaDeMusicas(null, l.getSong(i), "festa", l.getAlbum(i), l.getArtist(i), obj);

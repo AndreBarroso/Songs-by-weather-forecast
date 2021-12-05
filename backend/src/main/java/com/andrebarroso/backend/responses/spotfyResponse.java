@@ -7,23 +7,28 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class spotfyResponse {
-//	private List items;
-	
+
 	private List<Object> items = new ArrayList<Object>();
 	private String item;
 	private String album;
 	private String song;
 	private String artist;
 	
-//	private ArrayList<ArrayList> items = new ArrayList();
-	
 	public List getItems() {
 		return items; 
 	}
 	
-	public String getTrack(int i) {
+	private String getTrack(int i) {
         item = items.get(i).toString();
 		return item.substring(item.indexOf("track"), item.indexOf("uri=spotify:track:"));
+	}
+	
+	public String getSong(int i) {
+		String t = getTrack(i);
+		String wordToDiscartCharacter = t.substring(t.indexOf("is_local"));
+		song = wordToDiscartCharacter
+				.substring(wordToDiscartCharacter.indexOf("name") + 5, wordToDiscartCharacter.indexOf("popularity") - 2);
+		return song;
 	}
 	
 	public String getAlbum(int i) {
@@ -40,13 +45,5 @@ public class spotfyResponse {
 		artist = wordToDiscartCharacter
 				.substring(wordToDiscartCharacter.indexOf("name") + 5, wordToDiscartCharacter.indexOf("type") - 2);
 		return artist;
-	}
-	
-	public String getSong(int i) {
-		String t = getTrack(i);
-		String wordToDiscartCharacter = t.substring(t.indexOf("is_local"));
-		song = wordToDiscartCharacter
-				.substring(wordToDiscartCharacter.indexOf("name") + 5, wordToDiscartCharacter.indexOf("popularity") - 2);
-		return song;
 	}
 }

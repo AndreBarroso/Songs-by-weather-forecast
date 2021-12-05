@@ -1,6 +1,5 @@
 package com.andrebarroso.backend.responses;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -14,7 +13,7 @@ public class playListResponse {
 	private List listaMusicas;
 	
 	public String getCidade() {
-		return "cidade";
+		return cidade;
 	}
 	
 	public String getTemperatura() {
@@ -32,22 +31,4 @@ public class playListResponse {
 	public List getListaMusicas() {
 		return listaMusicas;
 	}
-	
-//	public Object fullData() {
-//		return {"temperatura": temperatura};
-//	}
-	
-	@Override
-	public String toString() {
-		return "{ cidade:" + cidade + ", temperatura:" + temperatura + ", dataDaChamada:"
-				+ dataDaChamada + ", solicitante:" + solicitante + ", listaMusicas:" + listaMusicas + "}";
-	}
-
-//	@Override
-//	public String toString() {
-//		return "playListResponse [cidade=" + cidade + ", temperatura=" + temperatura + ", dataDaChamada="
-//				+ dataDaChamada + ", solicitante=" + solicitante + ", listaMusicas=" + listaMusicas + "]";
-//	}
-	
-	
 }

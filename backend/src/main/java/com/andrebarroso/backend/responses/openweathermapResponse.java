@@ -10,20 +10,18 @@ public class openweathermapResponse {
 	private Double tempCelcius;
 
 	
-	public String getTempKelvin() {
+	private String getTempKelvin() {
 		mainString = main.toString();
 		tempString = mainString.substring(6, mainString.indexOf(","));
 		return mainString.substring(6, mainString.indexOf(","));
 	}
 	
+	private Double getTempCelcius(String temp) {
+		return Double.parseDouble( temp ) - 273.15;
+	}
 	
 	public Double getTemp() {
 		tempCelcius = getTempCelcius(getTempKelvin());
 		return Math.round(tempCelcius * 10.0)/10.0;
 	}
-	
-	public Double getTempCelcius(String temp) {
-		return Double.parseDouble( temp ) - 273.15;
-	}
-	
 }

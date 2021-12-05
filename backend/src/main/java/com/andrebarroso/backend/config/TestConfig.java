@@ -23,7 +23,6 @@ public class TestConfig implements CommandLineRunner{
 	@Autowired
 	private ChamadasPlayListRepository chamadaPlayListRespository;
 	
-
 	@Override
 	public void run(String... args) throws Exception {
 		
@@ -35,6 +34,5 @@ public class TestConfig implements CommandLineRunner{
 		 
 		 chamadaPlayListRespository.saveAll(Arrays.asList(c1, c2));
 		 listaDeMusicasRepository.saveAll(Arrays.asList(l1, l2));
-		 
 	}
 }
