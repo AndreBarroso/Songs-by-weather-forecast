@@ -14,7 +14,7 @@ public class playListResponse {
 	private List listaMusicas;
 	
 	public String getCidade() {
-		return "dddddd";
+		return "cidade";
 	}
 	
 	public String getTemperatura() {
@@ -29,7 +29,25 @@ public class playListResponse {
 		return solicitante;
 	}
 	
-	public List<String> getListaMusicas() {
+	public List getListaMusicas() {
 		return listaMusicas;
 	}
+	
+//	public Object fullData() {
+//		return {"temperatura": temperatura};
+//	}
+	
+	@Override
+	public String toString() {
+		return "{ cidade:" + cidade + ", temperatura:" + temperatura + ", dataDaChamada:"
+				+ dataDaChamada + ", solicitante:" + solicitante + ", listaMusicas:" + listaMusicas + "}";
+	}
+
+//	@Override
+//	public String toString() {
+//		return "playListResponse [cidade=" + cidade + ", temperatura=" + temperatura + ", dataDaChamada="
+//				+ dataDaChamada + ", solicitante=" + solicitante + ", listaMusicas=" + listaMusicas + "]";
+//	}
+	
+	
 }

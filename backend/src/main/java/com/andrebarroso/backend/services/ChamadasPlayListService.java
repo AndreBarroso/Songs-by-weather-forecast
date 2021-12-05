@@ -31,7 +31,7 @@ public class ChamadasPlayListService {
 	private String URLSpotifyInitBase = "https://api.spotify.com/v1/playlists/";
 	private String URLSpotifyFinalBase = "/tracks?limit=20";
 	private String typeMusic;
-	private String autorization = "Bearer BQCo5-8eu98BkKNcSzT_NG5qymG_1kVChZhmZrUFU9U36XNUw16VbKR9G-UtxKsO-HwYSPcmTIhEus-j9PJLBdsZqsMZoUNnhUh3gWkg16nJJKINaxLi9QPf9xXOWHDw-65EWWA_wu4_6eF-KQ";
+	private String autorization = "Bearer BQBf5QGveCX-aifudd9gzyz91yNW3yQYYBhFspYE_lqWA0-HOIv6iztC-CbN0kDKJVQsQCMBzpmAoAuWJh7In4kbNhRAh_GDlOrTWN4UTvMqp5p5PgyZ0Csieed8QLCo_WSLFSOdUiuZez70Xg";
 	private List <String> list = new ArrayList();
 	private ListaDeMusicas musicaNova;
 	private List testa;
