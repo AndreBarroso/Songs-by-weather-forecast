@@ -50,7 +50,7 @@ public class ChamadasPlayListService {
 		return repository.findAll();
 	}
 	
-	public ChamadasPlayList insert(ChamadasPlayList obj) {
+	public playListResponse insert(ChamadasPlayList obj) {
 		try {
 			temp = getCurrentTemperature(obj.getCidade());
 			obj.setTemperatura(temp);
@@ -62,7 +62,7 @@ public class ChamadasPlayListService {
 			response = repository.save(obj);
 			
 			playListSugestion(obj.getId());      
-			return response;
+			return playListSugestion(obj.getId());
 	
 			}
 			catch(Exception e) {
