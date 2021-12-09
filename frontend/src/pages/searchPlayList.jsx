@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
-import { GetTokenAuthorization } from '../services/resquestAPIs';
+import React, { useEffect, useState } from 'react';
+import { GetTokenAuthorization, RequestPlayList } from '../services/resquestAPIs';
 
 export default function SearchPlayList() {
+  const [tokenSpotfy, setTokenSpotify] = useState('');
+  const [listMusics, setListMusics] = useState('');
 
   const getCode = () => {
     let code = null;
@@ -25,18 +27,32 @@ export default function SearchPlayList() {
     data.append('grant_type', 'client_credentials');
 
     const token = await GetTokenAuthorization(data);
-    console.log(token)
+
+    setTokenSpotify(token);
 
     return token;
   };
+
+  const handleClick = async () => {
+    const list = await RequestPlayList(tokenSpotfy);
+    setListMusics(list);
+  } 
 
   useEffect(() => {
     getToken();
   }, []);
 
+  useEffect(() => {
+   console.log(listMusics);
+  }, [listMusics]);
+
   return (
     <div>
-      GETTOKEN
+      <button
+        onClick={handleClick}
+      >
+        Busca Lista
+      </button>
     </div>
   );
 }
