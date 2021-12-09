@@ -26,8 +26,8 @@ public class TestConfig implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		 ChamadasPlayList c1 = new ChamadasPlayList(null, "Belo Horizonte", 40.0, Instant.now(), "André");
-		 ChamadasPlayList c2 = new ChamadasPlayList(null, "Porto Alegre", 5.0, Instant.now(), "Pedro");
+		 ChamadasPlayList c1 = new ChamadasPlayList(null, "Belo Horizonte", 40.0, Instant.now(), "André", "jnfeinfwen42342");
+		 ChamadasPlayList c2 = new ChamadasPlayList(null, "Porto Alegre", 5.0, Instant.now(), "Pedro", "nfoerno2394932");
 
 		 ListaDeMusicas l1 = new ListaDeMusicas(null, "Californication", "Rock", "Greates Hits", "Red Hot", c1);
 		 ListaDeMusicas l2 = new ListaDeMusicas(null, "ByTheWay","Rock", "Greates Hits", "Red Hot", c1);

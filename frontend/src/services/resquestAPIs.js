@@ -27,10 +27,10 @@ const api = axios.create({
     baseURL: `http://localhost:${PORT}`,
 });
 
-const body = {'cidade': 'Leme do Prado', 'solicitante': 'André Barroso'}
+export const RequestPlayList = async (token) => {
+    console.log('ccccchegou no axios', token)
 
-export const RequestPlayList = async (data) => {
-    console.log('ccccchegou no axios', data)
+    const body = {'cidade': 'Leme do Prado', 'solicitante': 'André Barroso', token}
 
     const response = await api.post('/chamadas', body);
     

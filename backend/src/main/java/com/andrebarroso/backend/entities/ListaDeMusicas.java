@@ -19,7 +19,7 @@ public class ListaDeMusicas implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name;
+	private String nome;
 	private String estilo;
 	private String album;
 	private String artista;
@@ -32,9 +32,9 @@ public class ListaDeMusicas implements Serializable{
 	public ListaDeMusicas() {
 	}
 
-	public ListaDeMusicas(Long id, String name, String estilo, String album, String artista,ChamadasPlayList playList) {
+	public ListaDeMusicas(Long id, String nome, String estilo, String album, String artista,ChamadasPlayList playList) {
 		this.id = id;
-		this.name = name;
+		this.nome = nome;
 		this.estilo = estilo;
 		this.album = album;
 		this.artista = artista;
@@ -50,11 +50,11 @@ public class ListaDeMusicas implements Serializable{
 	}
 
 	public String getName() {
-		return name;
+		return nome;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String nome) {
+		this.nome = nome;
 	}
 
 	public String getEstilo() {

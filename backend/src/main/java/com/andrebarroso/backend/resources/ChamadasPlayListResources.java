@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +19,7 @@ import com.andrebarroso.backend.responses.playListResponse;
 import com.andrebarroso.backend.services.ChamadasPlayListService;
 
 @RestController
-@RequestMapping(value = "/chamadas")
+@RequestMapping(value = "/chamadas", consumes="application/json", produces ="application/json")
 public class ChamadasPlayListResources {
 	private playListResponse requestCompleted;
 
@@ -39,6 +40,11 @@ public class ChamadasPlayListResources {
 	
 	@PostMapping
 	public ResponseEntity<playListResponse> insert(@RequestBody ChamadasPlayList obj) {
+		System.out.println("Teste aceleração xxxxxxxxxxxxxxx");
+	
+//		
+//		
+//		
 		requestCompleted = service.insert(obj);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")

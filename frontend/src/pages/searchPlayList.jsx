@@ -28,7 +28,7 @@ export default function SearchPlayList() {
 
     const token = await GetTokenAuthorization(data);
 
-    setTokenSpotify(token);
+    setTokenSpotify(`Bearer ${token}`);
 
     return token;
   };

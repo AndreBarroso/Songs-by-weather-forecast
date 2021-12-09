@@ -30,7 +30,6 @@ public class ChamadasPlayListService {
 	private Double temp;
 	private String URLSpotifyInitBase = "https://api.spotify.com/v1/playlists/";
 	private String URLSpotifyFinalBase = "/tracks?limit=20";
-	private String autorization = "Bearer BQAQ8HRIAu3FiaN7Xj5M-WXsWXBwMmELx0RulXPoM2e1nfmPrD0JgdGXTRmujBdPbFkfGgufs_CY39Dzjz7famdB3Rubg-wzsyvaCfkFxryvqrKPFee4UdM4GGRxPw39W1WjT4Ng7O9o77pqeQ";
 	private ChamadasPlayList response;
 
 	@Autowired
@@ -98,7 +97,7 @@ public class ChamadasPlayListService {
 		Mono<spotfyResponse> apiData = this.webClient.
 		method(HttpMethod.GET)
 		.uri(URLSpotifyInitBase + typeOfSongs + URLSpotifyFinalBase)
-		.header(HttpHeaders.AUTHORIZATION, autorization)
+		.header(HttpHeaders.AUTHORIZATION, obj.getToken())
 		.retrieve()
 		.bodyToMono(spotfyResponse.class);
 		
