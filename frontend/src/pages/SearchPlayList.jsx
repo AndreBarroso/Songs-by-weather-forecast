@@ -4,6 +4,7 @@ import { GetTokenAuthorization, RequestPlayList } from '../services/resquestAPIs
 export default function SearchPlayList() {
   const [tokenSpotfy, setTokenSpotify] = useState('');
   const [listMusics, setListMusics] = useState('');
+  const [ isLoading, setIsLoading ] = useState(false);
 
   const getCode = () => {
     let code = null;

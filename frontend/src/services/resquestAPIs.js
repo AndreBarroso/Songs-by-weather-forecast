@@ -4,18 +4,32 @@ const clientId = '4e8d12ac54234d9091767fdf7890e974';
 const clientSecret = '‌f4aa7c2387364f978442b3ed3c46b91e‌';
 const str = clientId + ':' + clientSecret;
 
-export const GetTokenAuthorization = async (data) => {
-    const result = await fetch('https://accounts.spotify.com/api/token', {
-        headers: {
-            'Content-Type' : 'application/x-www-form-urlencoded', 
-            'Authorization' : 'Basic NGU4ZDEyYWM1NDIzNGQ5MDkxNzY3ZmRmNzg5MGU5NzQ6ZjRhYTdjMjM4NzM2NGY5Nzg0NDJiM2VkM2M0NmI5MWU='
-        },
-        method: 'POST',
-        body: data
-    });
+// export const GetTokenAuthorization = async (data) => {
+//     const result = await fetch('https://accounts.spotify.com/api/token', {
+//         headers: {
+//             'Content-Type' : 'application/x-www-form-urlencoded', 
+//             'Authorization' : 'Basic NGU4ZDEyYWM1NDIzNGQ5MDkxNzY3ZmRmNzg5MGU5NzQ6ZjRhYTdjMjM4NzM2NGY5Nzg0NDJiM2VkM2M0NmI5MWU='
+//         },
+//         method: 'POST',
+//         body: data
+//     });
 
-    const resultJson = await result.json();
-    const token = resultJson.access_token;
+//     const resultJson = await result.json();
+//     const token = resultJson.access_token;
+//     return token;
+// }
+
+export const GetTokenAuthorization = async (data) => {
+
+    const headers = {'Content-Type' : 'application/x-www-form-urlencoded', 
+    'Authorization' : 'Basic NGU4ZDEyYWM1NDIzNGQ5MDkxNzY3ZmRmNzg5MGU5NzQ6ZjRhYTdjMjM4NzM2NGY5Nzg0NDJiM2VkM2M0NmI5MWU='}
+
+    const result = await axios.post(
+        'https://accounts.spotify.com/api/token',
+        data,
+        { headers: headers }
+    )
+    const token = result.data.access_token;
     return token;
 }
 
@@ -35,7 +49,7 @@ export const RequestPlayList = async (token) => {
     const response = await api.post('/chamadas', body);
     
     console.log(response.data, 'resposta do axios')
-    // return result.data;
+    return response.data
 };
 
 

@@ -1,16 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { GetTokenAuthorization } from '../services/resquestAPIs';
-
+import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import UserContext from '../context/UserContext';
+// import { GetTokenAuthorization } from '../services/resquestAPIs';
 
 export default function Home() {
-  const redirectURL = new URL("https://accounts.spotify.com/authorize")
-  redirectURL.search.Params.append('response_type', 'code');
-  redirectURL.search.Params.append('client_id', '4fda7f4932bf4c068141a1e526502f7e‌');
-  redirectURL.search.Params.append('redirect_uri', `${window.location.origin}/spotify/minhaLista`);
+  const { setUserData } = useContext(UserContext);
+  const history = useHistory();
+
 
   return (
     <div>
-        <button>Conecta com o spotfy</button>
+        <input
+          type="text"
+          placeholder='Digite seu nome'
+          onChange={ (e) => setUserData(e.target.value)}
+        />
+        <button
+          onClick={() => history.push('/minhaLista')}
+        >
+          Acessar
+        </button>
     </div>
   );
 }
