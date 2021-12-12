@@ -41,9 +41,9 @@ const api = axios.create({
     baseURL: `http://localhost:${PORT}`,
 });
 
-export const RequestPlayList = async (token) => {
+export const RequestPlayList = async (token, numberOfTracks, city, userData) => {
    
-    const body = {'cidade': 'Leme do Prado', 'solicitante': 'André Barroso', token}
+    const body = { token, numberOfTracks, 'cidade': city, 'solicitante': userData }
 
     const response = await api.post('/chamadas', body);
     

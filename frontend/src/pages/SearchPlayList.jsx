@@ -5,9 +5,12 @@ import PlayList from '../components/PlayList';
 import UserContext from '../context/UserContext';
 
 export default function SearchPlayList() {
+  const { userData } = useContext(UserContext);
   const [tokenSpotfy, setTokenSpotify] = useState('');
   const [listMusics, setListMusics] = useState('');
   const [renderBeforeRequest, setRenderBeforeRequest] = useState('');
+  const [ numberOfTracks, setNumberOfTracks ] = useState(0);
+  const [ city, setCity ] = useState('Pato Branco');
 
   const saveToken = async () => {
     const token = await getToken();
@@ -24,13 +27,18 @@ export default function SearchPlayList() {
   } 
 
   const saveRequestPlayList = async () => {
-    const list = await RequestPlayList(tokenSpotfy);
+    const list = await RequestPlayList(tokenSpotfy, numberOfTracks, city, userData);
     setListMusics(list);
   } 
 
   useEffect( () => {
     if(tokenSpotfy && renderBeforeRequest) saveRequestPlayList();
   }, [renderBeforeRequest]);
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    if(Number( value ) || value === '') setNumberOfTracks( e.target.value );
+  }
 
   return (
     <div>
@@ -39,6 +47,28 @@ export default function SearchPlayList() {
       >
         Busca Lista
       </button>
+      <button
+        onClick={ () => {
+          if(numberOfTracks > 0) setNumberOfTracks(Number(numberOfTracks) - 1 )
+        }}
+      >
+        -
+      </button>
+      <input
+        value={ numberOfTracks }
+        onChange={ handleChange }
+      />
+       <button
+        onClick={ () => setNumberOfTracks(Number(numberOfTracks) + 1 ) }
+      >
+        +
+      </button>
+
+      <input
+        value={ city }
+        onChange={ ( e ) => setCity( e.target.value )}
+        placeholder='ex: Pato Branco'
+      />
       { !listMusics ? renderBeforeRequest : <PlayList list={listMusics.listaMusicas} />}
     </div>
   );
