@@ -10,6 +10,7 @@ export default function SearchPlayList() {
   const [listMusics, setListMusics] = useState('');
   const [renderBeforeRequest, setRenderBeforeRequest] = useState('');
   const [ numberOfTracks, setNumberOfTracks ] = useState(0);
+  const [ disable, setDisable ] = useState(true);
   const [ city, setCity ] = useState('Pato Branco');
 
   const saveToken = async () => {
@@ -40,9 +41,20 @@ export default function SearchPlayList() {
     if(Number( value ) || value === '') setNumberOfTracks( e.target.value );
   }
 
+  const disableButton = () => {
+    if( !numberOfTracks ) setDisable(true);
+    else setDisable(false);
+  }
+
+  useEffect( () => {
+    disableButton();
+  }, [ numberOfTracks ]);
+
+
   return (
     <div>
       <button
+        disabled={ disable }
         onClick={ handleClick }
       >
         Busca Lista
