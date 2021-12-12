@@ -14,21 +14,20 @@ import com.andrebarroso.backend.entities.ChamadasPlayList;
 import com.andrebarroso.backend.entities.ListaDeMusicas;
 import com.andrebarroso.backend.repositories.ChamadasPlayListRepository;
 import com.andrebarroso.backend.repositories.ListaDeMusicasRespository;
-import com.andrebarroso.backend.responses.openweathermapResponse;
 import com.andrebarroso.backend.responses.playListResponse;
 import com.andrebarroso.backend.responses.spotfyResponse;
 import com.andrebarroso.backend.services.exceptions.ResourceNotFoundException;
+import com.andrebarroso.backend.services.utils.cityTemperature;
 import com.andrebarroso.backend.services.utils.spotifyEnpointsParameters;
 
 import reactor.core.publisher.Mono;
 
 @Service
 public class ChamadasPlayListService {
-	private String URLBaseOpenweathermap = "https://api.openweathermap.org/data/2.5/weather?q=";
-	private String apiTempToken = "&appid=dc883dd38174c35149a5d7d336f5ff65";
 	private Object responsePost;
 	private Double temp;
 	private ChamadasPlayList response;
+	private cityTemperature objAPITemperature;
 
 	@Autowired
 	private WebClient webClient;
@@ -45,7 +44,8 @@ public class ChamadasPlayListService {
 	
 	public playListResponse insert(ChamadasPlayList obj) {
 		try {
-			temp = getCurrentTemperature(obj.getCidade());
+			objAPITemperature = new cityTemperature(obj.getCidade(), webClient);
+            temp = objAPITemperature.getCurrentTemperature();
 			obj.setTemperatura(temp);
 			obj.setDataDaChamada(Instant.now());
 			responsePost = repository.save(obj);
@@ -66,18 +66,6 @@ public class ChamadasPlayListService {
 	public ChamadasPlayList findById(Long id) {
 		Optional <ChamadasPlayList> obj = repository.findById(id);
 		return obj.get();
-	}
-	
-	private Double getCurrentTemperature(String city) {
-		
-		Mono<openweathermapResponse> apiData = this.webClient.
-		method(HttpMethod.GET)
-		.uri(URLBaseOpenweathermap + city + apiTempToken)
-		.retrieve()
-		.bodyToMono(openweathermapResponse.class);
-		
-		openweathermapResponse temperature = apiData.block();
-		return temperature.getTemp();
 	}
 	
 	private playListResponse playListSugestion(Long idRequest) {
