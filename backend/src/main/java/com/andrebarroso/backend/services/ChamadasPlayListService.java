@@ -29,7 +29,6 @@ public class ChamadasPlayListService {
 	private Object responsePost;
 	private Double temp;
 	private String URLSpotifyInitBase = "https://api.spotify.com/v1/playlists/";
-	private String URLSpotifyFinalBase = "/tracks?limit=20";
 	private ChamadasPlayList response;
 
 	@Autowired
