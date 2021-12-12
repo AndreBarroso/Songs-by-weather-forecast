@@ -20,6 +20,7 @@ public class ChamadasPlayList implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private String token;
+	private String numberOfTracks;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -93,6 +94,10 @@ public class ChamadasPlayList implements Serializable {
 	
 	public String getToken() {
 		return token;
+	}
+	
+	public String getNumberOfTracks() {
+		return numberOfTracks;
 	}
 	
 

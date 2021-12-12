@@ -96,7 +96,7 @@ public class ChamadasPlayListService {
 
 		Mono<spotfyResponse> apiData = this.webClient.
 		method(HttpMethod.GET)
-		.uri(URLSpotifyInitBase + typeOfSongs + URLSpotifyFinalBase)
+		.uri(URLSpotifyInitBase + typeOfSongs + "/tracks?limit=" + obj.getNumberOfTracks())
 		.header(HttpHeaders.AUTHORIZATION, obj.getToken())
 		.retrieve()
 		.bodyToMono(spotfyResponse.class);
