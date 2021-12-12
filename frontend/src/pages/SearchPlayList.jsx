@@ -29,6 +29,7 @@ export default function SearchPlayList() {
 
   const saveRequestPlayList = async () => {
     const list = await RequestPlayList(tokenSpotfy, numberOfTracks, city, userData);
+    console.log('eeeee', list)
     setListMusics(list);
   } 
 
