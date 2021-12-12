@@ -19,6 +19,7 @@ import com.andrebarroso.backend.responses.spotfyResponse;
 import com.andrebarroso.backend.services.exceptions.ResourceNotFoundException;
 import com.andrebarroso.backend.services.utils.cityTemperature;
 import com.andrebarroso.backend.services.utils.spotifyEnpointsParameters;
+import com.andrebarroso.backend.services.utils.tracksSpotify;
 
 import reactor.core.publisher.Mono;
 
@@ -28,6 +29,7 @@ public class ChamadasPlayListService {
 	private Double temp;
 	private ChamadasPlayList response;
 	private cityTemperature objAPITemperature;
+	private tracksSpotify objAPITracksSpotify;
 
 	@Autowired
 	private WebClient webClient;
@@ -49,12 +51,10 @@ public class ChamadasPlayListService {
 			obj.setTemperatura(temp);
 			obj.setDataDaChamada(Instant.now());
 			responsePost = repository.save(obj);
-			
-			getTracks("37i9dQZF1DXa2PvUpywmrr", obj);
-			
-			response = repository.save(obj);
-			
-			playListSugestion(obj.getId());      
+
+			objAPITracksSpotify = new tracksSpotify(obj, webClient, listaRepository);
+			objAPITracksSpotify.getTracks();
+  
 			return playListSugestion(obj.getId());
 	
 			}
@@ -76,31 +76,5 @@ public class ChamadasPlayListService {
 		.bodyToMono(playListResponse.class);
 		playListResponse obj = apiData.block();
 		return obj;
-	}
-	
-	private void getTracks(String typeOfSongs, ChamadasPlayList obj) {
-		String URLSpotifyInitBase = "https://api.spotify.com/v1/playlists/";
-		spotifyEnpointsParameters parameter;
-		parameter = new spotifyEnpointsParameters(obj.getNumberOfTracks(), obj.getTemperatura());
-		
-		String qtdTracks = "/tracks?limit=" + parameter.getNumeroDeFaixas();
-		String URL = URLSpotifyInitBase + parameter.getEstiloPorCódigo() + qtdTracks;
-		System.out.println("minha url");
-		System.out.println(URL);
-		
-		Mono<spotfyResponse> apiData = this.webClient.
-		method(HttpMethod.GET)
-		.uri(URL)
-		.header(HttpHeaders.AUTHORIZATION, obj.getToken())
-		.retrieve()
-		.bodyToMono(spotfyResponse.class);
-		
-		spotfyResponse l = apiData.block();
-		
-		for(int i = 0; i < l.getItems().size(); i ++ ) {
-			ListaDeMusicas musica = new ListaDeMusicas(null, l.getSong(i), parameter.getEstiloPorNome(), l.getAlbum(i), l.getArtist(i), obj);
-
-			listaRepository.save(musica);
-		}
 	}
 }
