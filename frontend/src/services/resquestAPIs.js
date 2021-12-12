@@ -42,13 +42,11 @@ const api = axios.create({
 });
 
 export const RequestPlayList = async (token) => {
-    console.log('ccccchegou no axios', token)
-
+   
     const body = {'cidade': 'Leme do Prado', 'solicitante': 'André Barroso', token}
 
     const response = await api.post('/chamadas', body);
     
-    console.log(response.data, 'resposta do axios')
     return response.data
 };
 

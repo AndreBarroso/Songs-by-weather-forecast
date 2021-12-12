@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { RequestPlayList } from '../services/resquestAPIs';
 import { getToken } from '../services/getToken';
+import PlayList from '../components/PlayList';
+import UserContext from '../context/UserContext';
 
 export default function SearchPlayList() {
+  const { setUserData, isLoading, setIsLoading  } = useContext(UserContext);
   const [tokenSpotfy, setTokenSpotify] = useState('');
   const [listMusics, setListMusics] = useState('');
-  const [ isLoading, setIsLoading ] = useState(false);
-
+ 
   const handleClick = async () => {
     const list = await RequestPlayList(tokenSpotfy);
     setListMusics(list);
@@ -23,15 +25,17 @@ export default function SearchPlayList() {
 
   useEffect(() => {
    console.log(listMusics);
+  //  setIsLoading(false)
   }, [listMusics]);
 
   return (
     <div>
       <button
-        onClick={handleClick}
+        onClick={ handleClick }
       >
         Busca Lista
       </button>
+      { !listMusics ? <span>Loading ... </span>: <PlayList list={listMusics.listaMusicas} />}
     </div>
   );
 }
