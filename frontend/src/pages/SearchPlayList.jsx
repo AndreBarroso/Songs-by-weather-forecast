@@ -5,14 +5,9 @@ import PlayList from '../components/PlayList';
 import UserContext from '../context/UserContext';
 
 export default function SearchPlayList() {
-  const { setUserData, isLoading, setIsLoading  } = useContext(UserContext);
   const [tokenSpotfy, setTokenSpotify] = useState('');
   const [listMusics, setListMusics] = useState('');
- 
-  const handleClick = async () => {
-    const list = await RequestPlayList(tokenSpotfy);
-    setListMusics(list);
-  } 
+  const [renderBeforeRequest, setRenderBeforeRequest] = useState('');
 
   const saveToken = async () => {
     const token = await getToken();
@@ -23,10 +18,19 @@ export default function SearchPlayList() {
     saveToken();
   }, []);
 
-  useEffect(() => {
-   console.log(listMusics);
-  //  setIsLoading(false)
-  }, [listMusics]);
+  const handleClick = async () => {
+    setListMusics('');
+    setRenderBeforeRequest(<span>Loading ... </span> );
+  } 
+
+  const saveRequestPlayList = async () => {
+    const list = await RequestPlayList(tokenSpotfy);
+    setListMusics(list);
+  } 
+
+  useEffect( () => {
+    if(tokenSpotfy && renderBeforeRequest) saveRequestPlayList();
+  }, [renderBeforeRequest]);
 
   return (
     <div>
@@ -35,7 +39,7 @@ export default function SearchPlayList() {
       >
         Busca Lista
       </button>
-      { !listMusics ? <span>Loading ... </span>: <PlayList list={listMusics.listaMusicas} />}
+      { !listMusics ? renderBeforeRequest : <PlayList list={listMusics.listaMusicas} />}
     </div>
   );
 }
