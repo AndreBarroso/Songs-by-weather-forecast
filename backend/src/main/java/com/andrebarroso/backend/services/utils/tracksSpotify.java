@@ -7,6 +7,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import com.andrebarroso.backend.entities.ChamadasPlayList;
 import com.andrebarroso.backend.entities.ListaDeMusicas;
 import com.andrebarroso.backend.repositories.ListaDeMusicasRespository;
+import com.andrebarroso.backend.responses.playListResponse;
 import com.andrebarroso.backend.responses.spotfyResponse;
 
 import reactor.core.publisher.Mono;
@@ -48,5 +49,15 @@ public class tracksSpotify {
 
 			listaRepository.save(musica);
 		}
+	}
+	
+	public playListResponse playListSugestion(Long idRequest) {
+		Mono<playListResponse> APIData = this.webClient.
+		method(HttpMethod.GET)
+		.uri("http://localhost:8080/chamadas/{idRequest}", idRequest)
+		.retrieve()
+		.bodyToMono(playListResponse.class);
+		playListResponse obj = APIData.block();
+		return obj;
 	}
 }

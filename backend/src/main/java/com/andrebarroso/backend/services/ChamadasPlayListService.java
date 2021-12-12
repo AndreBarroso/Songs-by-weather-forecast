@@ -15,10 +15,8 @@ import com.andrebarroso.backend.entities.ListaDeMusicas;
 import com.andrebarroso.backend.repositories.ChamadasPlayListRepository;
 import com.andrebarroso.backend.repositories.ListaDeMusicasRespository;
 import com.andrebarroso.backend.responses.playListResponse;
-import com.andrebarroso.backend.responses.spotfyResponse;
 import com.andrebarroso.backend.services.exceptions.ResourceNotFoundException;
 import com.andrebarroso.backend.services.utils.cityTemperature;
-import com.andrebarroso.backend.services.utils.spotifyEnpointsParameters;
 import com.andrebarroso.backend.services.utils.tracksSpotify;
 
 import reactor.core.publisher.Mono;
@@ -30,6 +28,7 @@ public class ChamadasPlayListService {
 	private ChamadasPlayList response;
 	private cityTemperature objAPITemperature;
 	private tracksSpotify objAPITracksSpotify;
+	private playListResponse playListSugestion;
 
 	@Autowired
 	private WebClient webClient;
@@ -54,8 +53,10 @@ public class ChamadasPlayListService {
 
 			objAPITracksSpotify = new tracksSpotify(obj, webClient, listaRepository);
 			objAPITracksSpotify.getTracks();
+			
+			playListSugestion = objAPITracksSpotify.playListSugestion(obj.getId());
   
-			return playListSugestion(obj.getId());
+			return playListSugestion;
 	
 			}
 			catch(Exception e) {
@@ -66,15 +67,5 @@ public class ChamadasPlayListService {
 	public ChamadasPlayList findById(Long id) {
 		Optional <ChamadasPlayList> obj = repository.findById(id);
 		return obj.get();
-	}
-	
-	private playListResponse playListSugestion(Long idRequest) {
-		Mono<playListResponse> apiData = this.webClient.
-		method(HttpMethod.GET)
-		.uri("http://localhost:8080/chamadas/{idRequest}", idRequest)
-		.retrieve()
-		.bodyToMono(playListResponse.class);
-		playListResponse obj = apiData.block();
-		return obj;
 	}
 }
