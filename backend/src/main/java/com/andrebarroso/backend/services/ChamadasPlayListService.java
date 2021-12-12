@@ -1,7 +1,6 @@
 package com.andrebarroso.backend.services;
 
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +18,7 @@ import com.andrebarroso.backend.responses.openweathermapResponse;
 import com.andrebarroso.backend.responses.playListResponse;
 import com.andrebarroso.backend.responses.spotfyResponse;
 import com.andrebarroso.backend.services.exceptions.ResourceNotFoundException;
+import com.andrebarroso.backend.services.utils.spotifyEnpointsParameters;
 
 import reactor.core.publisher.Mono;
 
@@ -28,7 +28,6 @@ public class ChamadasPlayListService {
 	private String apiTempToken = "&appid=dc883dd38174c35149a5d7d336f5ff65";
 	private Object responsePost;
 	private Double temp;
-	private String URLSpotifyInitBase = "https://api.spotify.com/v1/playlists/";
 	private ChamadasPlayList response;
 
 	@Autowired
@@ -92,10 +91,18 @@ public class ChamadasPlayListService {
 	}
 	
 	private void getTracks(String typeOfSongs, ChamadasPlayList obj) {
-
+		String URLSpotifyInitBase = "https://api.spotify.com/v1/playlists/";
+		spotifyEnpointsParameters parameter;
+		parameter = new spotifyEnpointsParameters(obj.getNumberOfTracks(), obj.getTemperatura());
+		
+		String qtdTracks = "/tracks?limit=" + parameter.getNumeroDeFaixas();
+		String URL = URLSpotifyInitBase + parameter.getEstiloPorCódigo() + qtdTracks;
+		System.out.println("minha url");
+		System.out.println(URL);
+		
 		Mono<spotfyResponse> apiData = this.webClient.
 		method(HttpMethod.GET)
-		.uri(URLSpotifyInitBase + typeOfSongs + "/tracks?limit=" + obj.getNumberOfTracks())
+		.uri(URL)
 		.header(HttpHeaders.AUTHORIZATION, obj.getToken())
 		.retrieve()
 		.bodyToMono(spotfyResponse.class);
@@ -103,7 +110,7 @@ public class ChamadasPlayListService {
 		spotfyResponse l = apiData.block();
 		
 		for(int i = 0; i < l.getItems().size(); i ++ ) {
-			ListaDeMusicas musica = new ListaDeMusicas(null, l.getSong(i), "festa", l.getAlbum(i), l.getArtist(i), obj);
+			ListaDeMusicas musica = new ListaDeMusicas(null, l.getSong(i), parameter.getEstiloPorNome(), l.getAlbum(i), l.getArtist(i), obj);
 
 			listaRepository.save(musica);
 		}

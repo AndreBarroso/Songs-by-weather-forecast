@@ -15,15 +15,23 @@ public class spotifyEnpointsParameters {
 		this.temperatura = temperatura;
 	}
 	
-	public String GetEstiloPorCódigo() {
+	public Double getTemperatura() {
+		return temperatura;
+	}
+	
+	public String getNumeroDeFaixas() {
+		return numeroDeFaixas;
+	}
+
+	public String getEstiloPorCódigo() {
 		if(temperatura > 30) return codigoMusicasFesta;
 		if(temperatura >= 15 && temperatura <= 30) return codigoMusicasPop;
 		if(temperatura >= 10 && temperatura < 15) return codigoMusicasRock;
 		return codigoMusicasClassicas;
 	}
 	
-	public String GetEstiloPorNome() {
-		String estilo = GetEstiloPorCódigo();
+	public String getEstiloPorNome() {
+		String estilo = getEstiloPorCódigo();
 		if(estilo == codigoMusicasFesta ) return "festa";
 		if(estilo == codigoMusicasPop ) return "pop";
 		if(estilo == codigoMusicasRock ) return "rock";
