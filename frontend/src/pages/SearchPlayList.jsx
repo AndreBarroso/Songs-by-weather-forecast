@@ -41,14 +41,21 @@ export default function SearchPlayList() {
       setWrongCity(false);
    }
    catch (e) {
+     const error = e.toString();
+
+    if(error === 'Error: Network Error') {
+      alert( ' Server Error \n 500 - Internal server error\n Tente mais tarde :)' );
+      return history.push('/home')
+    }
+    
+    console.log('meu erro', typeof e)
+    console.log('meu erroooo', e.toString()); // passa o objeto de exceção para o manipulador de erro
     setWrongCity(true);
 
-    alert( 'Digite um nome de cidade válido!' );
+    
     history.push('/wrongCity')
 
    
-    
-      console.log('meu erro', e); // passa o objeto de exceção para o manipulador de erro
    }
   } 
 
