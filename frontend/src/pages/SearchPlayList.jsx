@@ -15,7 +15,6 @@ export default function SearchPlayList() {
   const [ numberOfTracks, setNumberOfTracks ] = useState('');
   const [ disable, setDisable ] = useState(true);
   const [ city, setCity ] = useState('');
-  const [ wrongCity, setWrongCity ] = useState(false);
 
   const saveToken = async () => {
     const token = await getToken();
@@ -32,13 +31,10 @@ export default function SearchPlayList() {
   } 
 
   const saveRequestPlayList = async () => {
-    
-
     try {
       const list = await RequestPlayList(tokenSpotfy, numberOfTracks, city, userData);
       console.log('eeeee', list)
       setListMusics(list);
-      setWrongCity(false);
    }
    catch (e) {
      const error = e.toString();
@@ -47,15 +43,8 @@ export default function SearchPlayList() {
       alert( ' Server Error \n 500 - Internal server error\n Tente mais tarde :)' );
       return history.push('/home')
     }
-    
-    console.log('meu erro', typeof e)
-    console.log('meu erroooo', e.toString()); // passa o objeto de exceção para o manipulador de erro
-    setWrongCity(true);
-
-    
+    alert( ' Digite um nome de ciadade válido' );
     history.push('/wrongCity')
-
-   
    }
   } 
 
@@ -127,10 +116,7 @@ export default function SearchPlayList() {
           onChange={ ( e ) => setCity( e.target.value )}
           placeholder="Digite o nome da cidade. ex: Pato Branco"
         />
-        { 
-          
-          renderListWithoudError()
-        }
+        { !listMusics ? renderBeforeRequest : <PlayList list={ listMusics.listaMusicas } />}
       </div>
     </div>
   );
