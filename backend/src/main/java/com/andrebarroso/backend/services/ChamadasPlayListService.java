@@ -5,13 +5,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.andrebarroso.backend.entities.ChamadasPlayList;
-import com.andrebarroso.backend.entities.ListaDeMusicas;
 import com.andrebarroso.backend.repositories.ChamadasPlayListRepository;
 import com.andrebarroso.backend.repositories.ListaDeMusicasRespository;
 import com.andrebarroso.backend.responses.playListResponse;

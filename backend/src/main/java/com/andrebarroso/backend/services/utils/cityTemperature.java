@@ -23,7 +23,7 @@ public class cityTemperature {
 	public Double getCurrentTemperature() {
 		Mono<openweathermapResponse> apiData = this.webClient.
 		method(HttpMethod.GET)
-		.uri(URLBaseOpenweathermap + "London" + apiTempToken)
+		.uri(URLBaseOpenweathermap + city + apiTempToken)
 		.retrieve()
 		.bodyToMono(openweathermapResponse.class);
 		

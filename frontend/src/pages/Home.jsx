@@ -1,10 +1,20 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../context/UserContext';
 
 export default function Home() {
-  const { setUserData, isLoading, setIsLoading  } = useContext(UserContext);
+  const { userData, setUserData } = useContext(UserContext);
+  const [ disable, setDisable ] = useState(true);
   const history = useHistory();
+
+  useEffect( () => {
+    setUserData('');
+  }, []);
+
+  useEffect( () => {
+    if( !userData ) setDisable(true);
+    else setDisable(false);
+  }, [ userData ]);
 
   return (
     <div>
@@ -14,6 +24,8 @@ export default function Home() {
           onChange={ (e) => setUserData(e.target.value)}
         />
         <button
+          type="button"
+          disabled={ disable }
           onClick={() => history.push('/minhaLista')}
         >
           Acessar

@@ -55,6 +55,7 @@ export default function SearchPlayList() {
   return (
     <div>
       <button
+        type="button"
         disabled={ disable }
         onClick={ handleClick }
       >
