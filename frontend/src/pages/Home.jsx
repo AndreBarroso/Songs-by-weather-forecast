@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../context/UserContext';
+import '../css/Login.css';
 
 export default function Home() {
   const { userData, setUserData } = useContext(UserContext);
@@ -17,7 +18,7 @@ export default function Home() {
   }, [ userData ]);
 
   return (
-    <div>
+    <div className='login'>
         <input
           type="text"
           placeholder='Digite seu nome'

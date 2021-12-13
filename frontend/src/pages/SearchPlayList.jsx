@@ -3,6 +3,8 @@ import { RequestPlayList } from '../services/resquestAPIs';
 import { getToken } from '../services/getToken';
 import PlayList from '../components/PlayList';
 import UserContext from '../context/UserContext';
+import '../css/Listagem.css';
+
 
 export default function SearchPlayList() {
   const { userData } = useContext(UserContext);
@@ -54,36 +56,39 @@ export default function SearchPlayList() {
 
   return (
     <div>
-      <button
-        type="button"
-        disabled={ disable }
-        onClick={ handleClick }
-      >
-        Busca Lista
-      </button>
-      <button
-        onClick={ () => {
-          if(numberOfTracks > 0) setNumberOfTracks(Number(numberOfTracks) - 1 )
-        }}
-      >
-        -
-      </button>
-      <input
-        value={ numberOfTracks }
-        onChange={ handleChange }
-      />
-       <button
-        onClick={ () => setNumberOfTracks(Number(numberOfTracks) + 1 ) }
-      >
-        +
-      </button>
-
-      <input
-        value={ city }
-        onChange={ ( e ) => setCity( e.target.value )}
-        placeholder='ex: Pato Branco'
-      />
-      { !listMusics ? renderBeforeRequest : <PlayList list={listMusics.listaMusicas} />}
+      <div className="listagem">
+        <button
+          type="button"
+          disabled={ disable }
+          onClick={ handleClick }
+        >
+          Buscar Playlist 
+        </button>
+        <button
+          className="incrementos"
+          onClick={ () => {
+            if(numberOfTracks > 0) setNumberOfTracks(Number(numberOfTracks) - 1 )
+          }}
+        >
+          -
+        </button>
+        <button
+          className="incrementos"
+          onClick={ () => setNumberOfTracks(Number(numberOfTracks) + 1 ) }
+        >
+          +
+        </button>
+        <input
+          value={ numberOfTracks }
+          onChange={ handleChange }
+        />
+        <input
+          value={ city }
+          onChange={ ( e ) => setCity( e.target.value )}
+          placeholder='ex: Pato Branco'
+        />
+        { !listMusics ? renderBeforeRequest : <PlayList list={listMusics.listaMusicas} />}
+      </div>
     </div>
   );
 }
