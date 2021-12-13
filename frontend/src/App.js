@@ -12,6 +12,7 @@ function App() {
         <Route exact path="/home" component={ Home } />
         <Route exact path="/minhaLista" component={ SearchPlayList } />
         <Route exact path="/"><Redirect to="/home" /></Route>
+        <Route exact path="/wrongCity"><Redirect to="/minhaLista" /></Route>
     </Switch>
    </BrowserRouter>
       

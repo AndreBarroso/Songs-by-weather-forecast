@@ -1,18 +1,21 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { RequestPlayList } from '../services/resquestAPIs';
 import { getToken } from '../services/getToken';
+import { useHistory } from 'react-router-dom';
 import PlayList from '../components/PlayList';
 import UserContext from '../context/UserContext';
 import '../css/Listagem.css';
 
 export default function SearchPlayList() {
+  const history = useHistory();
   const { userData } = useContext(UserContext);
-  const [tokenSpotfy, setTokenSpotify] = useState('');
-  const [listMusics, setListMusics] = useState('');
-  const [renderBeforeRequest, setRenderBeforeRequest] = useState('');
-  const [ numberOfTracks, setNumberOfTracks ] = useState(0);
+  const [ tokenSpotfy, setTokenSpotify ] = useState('');
+  const [ listMusics, setListMusics ] = useState('');
+  const [ renderBeforeRequest, setRenderBeforeRequest ] = useState('');
+  const [ numberOfTracks, setNumberOfTracks ] = useState('');
   const [ disable, setDisable ] = useState(true);
-  const [ city, setCity ] = useState('Pato Branco');
+  const [ city, setCity ] = useState('');
+  const [ wrongCity, setWrongCity ] = useState(false);
 
   const saveToken = async () => {
     const token = await getToken();
@@ -29,14 +32,29 @@ export default function SearchPlayList() {
   } 
 
   const saveRequestPlayList = async () => {
-    const list = await RequestPlayList(tokenSpotfy, numberOfTracks, city, userData);
-    console.log('eeeee', list)
-    setListMusics(list);
+    
+
+    try {
+      const list = await RequestPlayList(tokenSpotfy, numberOfTracks, city, userData);
+      console.log('eeeee', list)
+      setListMusics(list);
+      setWrongCity(false);
+   }
+   catch (e) {
+    setWrongCity(true);
+
+    alert( 'Digite um nome de cidade válido!' );
+    history.push('/wrongCity')
+
+   
+    
+      console.log('meu erro', e); // passa o objeto de exceção para o manipulador de erro
+   }
   } 
 
   useEffect( () => {
     if(tokenSpotfy && renderBeforeRequest) saveRequestPlayList();
-  }, [renderBeforeRequest]);
+  }, [ renderBeforeRequest ]);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -49,12 +67,15 @@ export default function SearchPlayList() {
   }
 
   useEffect( () => {
+    if(!numberOfTracks) setNumberOfTracks('');
     disableButton();
   }, [ numberOfTracks ]);
 
-  //listMusics.listaMusicas[0].estilo
-
-
+  
+  const renderListWithoudError = () => {
+    return !listMusics ? renderBeforeRequest : <PlayList list={ listMusics.listaMusicas } />
+  }
+  
   return (
     <div>
       <div>
@@ -63,8 +84,6 @@ export default function SearchPlayList() {
             em ${ listMusics.cidade }.\n 
             Sugerimos uma playlist de ${listMusics.listaMusicas[0].estilo}.`} 
           </div> 
-        
-          
         }
       </div>
       <div className="listagem">
@@ -78,7 +97,9 @@ export default function SearchPlayList() {
         <button
           className="incrementos"
           onClick={ () => {
-            if(numberOfTracks > 0) setNumberOfTracks(Number(numberOfTracks) - 1 )
+            if(numberOfTracks > 0){
+              setNumberOfTracks(Number(numberOfTracks) - 1 )
+            }
           }}
         >
           -
@@ -92,13 +113,17 @@ export default function SearchPlayList() {
         <input
           value={ numberOfTracks }
           onChange={ handleChange }
+          placeholder="Digite o número de faixas ou clique em +"
         />
         <input
           value={ city }
           onChange={ ( e ) => setCity( e.target.value )}
-          placeholder='ex: Pato Branco'
+          placeholder="Digite o nome da cidade. ex: Pato Branco"
         />
-        { !listMusics ? renderBeforeRequest : <PlayList list={ listMusics.listaMusicas } />}
+        { 
+          
+          renderListWithoudError()
+        }
       </div>
     </div>
   );
