@@ -5,7 +5,6 @@ import PlayList from '../components/PlayList';
 import UserContext from '../context/UserContext';
 import '../css/Listagem.css';
 
-
 export default function SearchPlayList() {
   const { userData } = useContext(UserContext);
   const [tokenSpotfy, setTokenSpotify] = useState('');
@@ -53,9 +52,21 @@ export default function SearchPlayList() {
     disableButton();
   }, [ numberOfTracks ]);
 
+  //listMusics.listaMusicas[0].estilo
+
 
   return (
     <div>
+      <div>
+        { !listMusics ? "" : 
+          <div>{`Neste momento faz ${ listMusics.temperatura } ºC 
+            em ${ listMusics.cidade }.\n 
+            Sugerimos uma playlist de ${listMusics.listaMusicas[0].estilo}.`} 
+          </div> 
+        
+          
+        }
+      </div>
       <div className="listagem">
         <button
           type="button"
@@ -87,7 +98,7 @@ export default function SearchPlayList() {
           onChange={ ( e ) => setCity( e.target.value )}
           placeholder='ex: Pato Branco'
         />
-        { !listMusics ? renderBeforeRequest : <PlayList list={listMusics.listaMusicas} />}
+        { !listMusics ? renderBeforeRequest : <PlayList list={ listMusics.listaMusicas } />}
       </div>
     </div>
   );
