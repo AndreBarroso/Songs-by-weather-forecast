@@ -92,21 +92,6 @@ body {
   background-color: rgba(0, 0, 0, 0);
 }
 
-.tooltip {
-  align-items: center;
-  background-color: white;
-  border-radius: 10px;
-  display: flex;
-  height: 300px;
-  justify-content: center;
-  width: 300px;
-}
-
-img {
-  margin: 0;
-  padding: 0;
-}
-
 @keyframes wawes {
 
   from {
@@ -124,4 +109,29 @@ img {
   padding-bottom: 9px;
   padding-top: 5px;
   width: 35px;
+}
+
+.musicContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;;
+  width: 370px;
+}
+
+.music {
+  display: inline-block;
+
+}
+
+.bottonDetalis {
+  border: 0px;
+  color: #407d6c;
+  font-size: 10px;
+  font-weight: bolder;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.bottonDetalis:hover {
+  opacity: 1;
 }

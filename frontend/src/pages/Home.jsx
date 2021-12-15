@@ -9,6 +9,7 @@ export default function Home() {
   const history = useHistory();
 
   useEffect( () => {
+    console.log('userDataHome: ', userData);
     setUserData('');
   }, []);
 

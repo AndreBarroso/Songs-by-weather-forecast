@@ -92,21 +92,6 @@ body {
   background-color: rgba(0, 0, 0, 0);
 }
 
-.tooltip {
-  align-items: center;
-  background-color: white;
-  border-radius: 10px;
-  display: flex;
-  height: 300px;
-  justify-content: center;
-  width: 300px;
-}
-
-img {
-  margin: 0;
-  padding: 0;
-}
-
 @keyframes wawes {
 
   from {

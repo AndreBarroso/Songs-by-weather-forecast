@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { RequestPlayList } from '../services/resquestAPIs';
 import { getToken } from '../services/getToken';
 import { useHistory } from 'react-router-dom';
+import ReactTooltip from 'react-tooltip';
 import PlayList from '../components/PlayList';
 import UserContext from '../context/UserContext';
 import '../css/Listagem.css';
@@ -23,7 +24,9 @@ export default function SearchPlayList() {
   } 
 
   useEffect( () => {
+    console.log('userDataSeach: ', userData)
     saveToken();
+    if(!userData) history.push('/home');
   }, []);
 
   const handleClick = async () => {

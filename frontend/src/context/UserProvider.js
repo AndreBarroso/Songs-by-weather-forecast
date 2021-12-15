@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import UserContext from './UserContext';
 
 function UserProvider({ children }) {
-  const [userData, setUserData] = useState('André Felipe');
+  const [userData, setUserData] = useState('');
 
   return (
     <UserContext.Provider
