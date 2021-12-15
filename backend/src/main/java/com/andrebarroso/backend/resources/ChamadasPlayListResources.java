@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -38,13 +39,15 @@ public class ChamadasPlayListResources {
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@GetMapping(value = "/filter")
+	public ResponseEntity<List<ChamadasPlayList>> findByName(@RequestParam("name") String name) {
+		List<ChamadasPlayList> obj = service.findAll();
+		return ResponseEntity.ok().body(obj);
+	}
+	
 	@PostMapping
 	public ResponseEntity<playListResponse> insert(@RequestBody ChamadasPlayList obj) {
-		System.out.println("Teste aceleração xxxxxxxxxxxxxxx");
-	
-//		
-//		
-//		
+
 		requestCompleted = service.insert(obj);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
