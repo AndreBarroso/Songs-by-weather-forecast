@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -25,12 +26,16 @@ public class ChamadasPlayList implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+    @NotNull
 	private String cidade;
 	private Double temperatura;
 	
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss[.SSS][.SS][.S]")
 	private LocalDateTime updatedTime;
 	private Instant dataDaChamada;
+	
+	@NotNull(message="Deve-se escrever um nome de cidade válido")
 	private String solicitante;
 
 	@OneToMany(mappedBy = "playList")

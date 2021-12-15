@@ -35,6 +35,6 @@ public class spotifyEnpointsParameters {
 		if(estilo == codigoMusicasFesta ) return "festa";
 		if(estilo == codigoMusicasPop ) return "pop";
 		if(estilo == codigoMusicasRock ) return "rock";
-		return "classica";
+		return "música clássica";
 	}
 }

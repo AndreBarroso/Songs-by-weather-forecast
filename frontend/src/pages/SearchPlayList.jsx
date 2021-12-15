@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import PlayList from '../components/PlayList';
 import UserContext from '../context/UserContext';
 import '../css/Listagem.css';
+import Sair from '../components/Sair';
 
 export default function SearchPlayList() {
   const history = useHistory();
@@ -67,11 +68,6 @@ export default function SearchPlayList() {
     disableButton();
   }, [ numberOfTracks ]);
 
-  
-  const renderListWithoudError = () => {
-    return !listMusics ? renderBeforeRequest : <PlayList list={ listMusics.listaMusicas } />
-  }
-  
   return (
     <div>
       <div>
@@ -81,6 +77,7 @@ export default function SearchPlayList() {
             Sugerimos uma playlist de ${listMusics.listaMusicas[0].estilo}.`} 
           </div> 
         }
+      <Sair/>
       </div>
       <div className="listagem">
         <button
