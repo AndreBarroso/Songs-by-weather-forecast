@@ -4,12 +4,18 @@ export default function PlayList({ list }) {
   const arrayListSongs = [...list];
   return (
     <div>
-      <ul>
+      <ol>
         {  arrayListSongs.map((song) => {
           const { id, name } = song;
-          return <li key={id}>{name}</li>
+          return (
+            <li
+              key={id}
+            >
+              {name} 
+              <button>Detalhes</button>
+            </li>)
         })}
-      </ul>
+      </ol>
     </div>
   );
 }

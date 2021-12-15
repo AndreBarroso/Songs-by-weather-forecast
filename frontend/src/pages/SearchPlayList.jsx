@@ -59,14 +59,17 @@ export default function SearchPlayList() {
   }
 
   const disableButton = () => {
-    if( !numberOfTracks ) setDisable(true);
+    if( !numberOfTracks || !city ) setDisable(true);
     else setDisable(false);
   }
 
   useEffect( () => {
     if(!numberOfTracks) setNumberOfTracks('');
-    disableButton();
   }, [ numberOfTracks ]);
+
+  useEffect( () => {
+    disableButton();
+  }, [ city, numberOfTracks ]);
 
   return (
     <div>
