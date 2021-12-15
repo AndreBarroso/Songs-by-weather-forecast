@@ -2,7 +2,6 @@ import React, { useEffect, useState, useContext } from 'react';
 import { RequestPlayList } from '../services/resquestAPIs';
 import { getToken } from '../services/getToken';
 import { useHistory } from 'react-router-dom';
-import ReactTooltip from 'react-tooltip';
 import PlayList from '../components/PlayList';
 import UserContext from '../context/UserContext';
 import '../css/Listagem.css';
@@ -24,9 +23,7 @@ export default function SearchPlayList() {
   } 
 
   useEffect( () => {
-    console.log('userDataSeach: ', userData)
     saveToken();
-    if(!userData) history.push('/home');
   }, []);
 
   const handleClick = async () => {
@@ -37,7 +34,6 @@ export default function SearchPlayList() {
   const saveRequestPlayList = async () => {
     try {
       const list = await RequestPlayList(tokenSpotfy, numberOfTracks, city, userData);
-      console.log('eeeee', list)
       setListMusics(list);
    }
    catch (e) {
@@ -77,6 +73,10 @@ export default function SearchPlayList() {
   return (
     <div>
       <div>
+        Seja bem vindo(a) { userData }. <br/> Escolha uma cidade e o número desejado
+        de faixas musicais.<br/>
+      </div>
+      <div>
         { !listMusics ? "" : 
           <div>{`Neste momento faz ${ listMusics.temperatura } ºC 
             em ${ listMusics.cidade }.\n 
@@ -84,6 +84,12 @@ export default function SearchPlayList() {
           </div> 
         }
       <Sair/>
+      <button
+        className="btnChangePage btnSearch"
+        onClick={ () => history.push('/listasAntigas')}
+      >
+        Pesquisas Anteriores
+      </button>
       </div>
       <div className="listagem">
         <button

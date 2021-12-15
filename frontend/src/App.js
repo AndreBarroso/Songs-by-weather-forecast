@@ -1,9 +1,8 @@
 import React from 'react';
 import { Redirect, BrowserRouter, Switch, Route } from 'react-router-dom';
-// import './App.css';
-
 import Home from './pages/Home'
 import SearchPlayList from './pages/SearchPlayList';
+import OlderSearchs from './pages/OlderSearchs';
 
 function App() {
   return (
@@ -11,6 +10,7 @@ function App() {
       <Switch>
         <Route exact path="/home" component={ Home } />
         <Route exact path="/minhaLista" component={ SearchPlayList } />
+        <Route exact path="/listasAntigas" component={ OlderSearchs } />
         <Route exact path="/"><Redirect to="/home" /></Route>
         <Route exact path="/wrongCity"><Redirect to="/minhaLista" /></Route>
     </Switch>

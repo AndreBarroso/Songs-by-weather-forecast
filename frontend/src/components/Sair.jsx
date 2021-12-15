@@ -18,7 +18,7 @@ export default function Sair() {
 
   return (
     <button
-      className="sair"
+      className="btnChangePage btnSair"
       type="button"
       onClick={ handleClick }
     >
