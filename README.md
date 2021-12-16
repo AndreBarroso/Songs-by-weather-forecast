@@ -11,6 +11,11 @@ parâmetro o nome de uma cidade, retornando em seguida uma sugestão de playlist
 - Back-End: Java, JPA, Hibernate, Spring Boot
 - Banco de dados: Postgresql
 - Deploy: Heroku
+---
+
+## Aplicação em execução
+
+![gif do app funcionando](https://github.com/AndreBarroso/Songs-by-weather-forecast/blob/master/frontend/public/songsPresentation.gif)
 
 ---
 
