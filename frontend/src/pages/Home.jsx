@@ -19,6 +19,7 @@ export default function Home() {
 
   return (
     <div className='login'>
+        <span>Descubra a playlist ideal para seu momento</span>
         <input
           type="text"
           placeholder='Digite seu nome'

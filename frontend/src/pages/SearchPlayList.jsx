@@ -72,25 +72,23 @@ export default function SearchPlayList() {
 
   return (
     <div>
-      <div>
-        Seja bem vindo(a) { userData }. <br/> Escolha uma cidade e o número desejado
-        de faixas musicais.<br/>
-      </div>
-      <div>
-        { !listMusics ? "" : 
-          <div>{`Neste momento faz ${ listMusics.temperatura } ºC 
-            em ${ listMusics.cidade }.\n 
-            Sugerimos uma playlist de ${listMusics.listaMusicas[0].estilo}.`} 
-          </div> 
-        }
-      <Sair/>
-      <button
-        className="btnChangePage btnSearch"
-        onClick={ () => history.push('/listasAntigas')}
-      >
-        Pesquisas Anteriores
-      </button>
-      </div>
+      <header>
+        <div>
+          Seja bem vindo(a)<span className='dataAPI'>{userData }</span>. <br/> 
+          Escolha uma cidade e o número desejado
+          de faixas musicais.<br/>
+        </div>
+        <div>
+          { !listMusics ? "" : 
+            <div>Neste momento faz 
+              <span className='dataAPI'> { listMusics.temperatura } ºC </span>
+              em  <span className='dataAPI'>{ listMusics.cidade }</span>. Sugerimos uma playlist de 
+              <span className='dataAPI'>{listMusics.listaMusicas[0].estilo}</span>.
+            </div> 
+          }
+        </div>
+        <Sair/>
+      </header>
       <div className="listagem">
         <button
           type="button"

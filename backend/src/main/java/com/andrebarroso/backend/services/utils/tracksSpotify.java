@@ -54,7 +54,8 @@ public class tracksSpotify {
 	public playListResponse playListSugestion(Long idRequest) {
 		Mono<playListResponse> APIData = this.webClient.
 		method(HttpMethod.GET)
-		.uri("http://localhost:8080/chamadas/{idRequest}", idRequest)
+//		.uri("http://localhost:8080/chamadas/{idRequest}", idRequest)
+		.uri("https://songs-by-weather-forecast-back.herokuapp.com/chamadas/{idRequest}", idRequest)
 		.retrieve()
 		.bodyToMono(playListResponse.class);
 		playListResponse obj = APIData.block();

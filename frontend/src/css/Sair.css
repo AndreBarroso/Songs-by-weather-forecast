@@ -6,7 +6,7 @@
   cursor: pointer;
   font-family: Quicksand , sans-serif;
   font-size: 15px;
-  height: 56px;
+  height: 40px;
   margin-left: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -14,7 +14,7 @@
   right: 2%;
   text-transform: uppercase;
   transition: background-color 300ms;
-  width: 110px;
+  width: 90px;
 }
 
 .btnChangePage:hover {
