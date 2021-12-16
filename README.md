@@ -24,7 +24,7 @@ parâmetro o nome de uma cidade, retornando em seguida uma sugestão de playlist
 Em seu primeiro acesso, a aplicação poderá estar em **modo sleep** podendo levar cerca de 20 segundos
 para que a aplicação seja carregada no navegador e mais 20 segundos para a primeira consulta.
 
-Caso queira executar o projeto do seu próprio computador, será necessário cloná-lo. Siga os passos a seguir:
+Caso queira executar o projeto do no próprio computador, será necessário cloná-lo. Siga os passos a seguir:
 
 1. Abra o terminal, acesse o diretório de sua preferência onde 
 você deseja fazer o download, e crie uma pasta usando o comando **mkdir**:
@@ -58,8 +58,8 @@ npm install
 
 6.1.1 Abra o Eclipse e na primeira janela, selecione o diretório raiz do projeto backend. Clique em Launch em seguida.
 
-6.1.2 Caso o projeto backend não abra no worspace, vá em **file** --> **Open Projects From File Sytem** e selecione o direrório raiz,
-clique uma vez na pasta backend (sem acessa-la) e por fim clique em **Finish**.
+6.1.2 Caso o projeto backend não abra no workspace, vá em **file** --> **Open Projects From File Sytem** e selecione o direrório raiz.
+Clique uma vez na pasta backend (sem acessa-la) e por fim clique em **Finish**.
 
 6.2 Após a etapa anterior, aguarde as dependências serem instaladas. Elas instalam automaticamente.
 
