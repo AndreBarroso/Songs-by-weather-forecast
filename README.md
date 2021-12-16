@@ -29,7 +29,7 @@ parâmetro o nome de uma cidade, retornando em seguida uma sugestão de playlist
 Em seu primeiro acesso, a aplicação poderá estar em **modo sleep** podendo levar cerca de 20 segundos
 para que a aplicação seja carregada no navegador e mais 20 segundos para a primeira consulta.
 
-Caso queira executar o projeto do no próprio computador, será necessário cloná-lo. Siga os passos a seguir:
+Caso queira executar o projeto a partir do seu próprio computador, será necessário cloná-lo. Siga os passos a seguir:
 
 1. Abra o terminal, acesse o diretório de sua preferência onde 
 você deseja fazer o download, e crie uma pasta usando o comando **mkdir**:
@@ -69,7 +69,7 @@ Clique uma vez na pasta backend (sem acessa-la) e por fim clique em **Finish**.
 6.2 Após a etapa anterior, aguarde as dependências serem instaladas. Elas instalam automaticamente.
 
 ##### Executando as instâncias locais
-7. Inciando aplicação
+7. Iniciando aplicação
 
 ##### Iniciando o Backend
 7.1 Após a etapa 6.2 clique no botão verde **Run** na parte superior do Eclipse e aguarde a execução do software.
