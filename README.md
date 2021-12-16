@@ -81,6 +81,6 @@ npm start
 ```
 Aguarde um momento. A aplicação abrirá automaticamente em seu navegardor.
 
-**!! ATENÇÃO !!**
+**!!! ATENÇÃO !!!**
 
-Caso tente fazer alguma requisição no frontend antes de iniciar o backend. Uma mensagem de **erro 500** aparecerá.
+Caso tente fazer alguma requisição no frontend antes de iniciar o backend, uma mensagem de **erro 500** aparecerá.
