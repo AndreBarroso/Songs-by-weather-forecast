@@ -52,30 +52,21 @@ git clone https://github.com/AndreBarroso/Songs-by-weather-forecast.git
 cd Songs-by-weather-forecast
 ```
 ##### Instalando o Frontend
-5. Em um terminal acesse a pasta frontend e instale as dependências:
+5. Em um terminal, acesse a pasta frontend e  de dentro dela instale as dependências:
 ```bash
 cd frontend;
 npm install
 ```
-
-##### Instalando o Backend
-6. O backend foi feito usando a IDE Eclipse. Para evitar problemas de compatibilidade, sugere-se que o mesmo seja executado nessa IDE:
-
-6.1.1 Abra o Eclipse e na primeira janela, selecione o diretório raiz do projeto backend. Clique em Launch em seguida.
-
-6.1.2 Caso o projeto backend não abra no workspace, vá em **file** --> **Open Projects From File Sytem** e selecione o direrório raiz.
-Clique uma vez na pasta backend (sem acessa-la) e por fim clique em **Finish**.
-
-6.2 Após a etapa anterior, aguarde as dependências serem instaladas. Elas instalam automaticamente.
-
 ##### Executando as instâncias locais
-7. Iniciando aplicação
+6. Iniciando aplicação
 
 ##### Iniciando o Backend
-7.1 Após a etapa 6.2 clique no botão verde **Run** na parte superior do Eclipse e aguarde a execução do software.
-
+6.1 No terminal, acesse a pasta backend do projeto e de dentro dela execute o comando: 
+```bash
+mvn spring-boot:run
+```
 ##### Iniciando o Frontend
-7.2 Após as etapas 5 e 6.2 entre no terminal do frontend, verifique se você está dentro do seu diretório. E execute:
+6.2 Após a etapa 6.1, pelo terminal entre na pasta do frontend, e de dentro dela execute:
 ```bash
 npm start
 ```
