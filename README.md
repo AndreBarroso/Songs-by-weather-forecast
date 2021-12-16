@@ -19,7 +19,7 @@ parâmetro o nome de uma cidade, retornando em seguida uma sugestão de playlist
 **Foi realizado o deploy do projeto. Para executá-lo basta acessar o link:
 [https://songs-by-weather-forecast-fron.herokuapp.com/](https://songs-by-weather-forecast-fron.herokuapp.com/).**
 
-**!! ATENÇÂO !!**
+**!!! ATENÇÃO !!!**
 
 Em seu primeiro acesso, a aplicação poderá estar em **modo sleep** podendo levar cerca de 20 segundos
 para que a aplicação seja carregada no navegador e mais 20 segundos para a primeira consulta.
@@ -76,6 +76,6 @@ npm start
 ```
 Aguarde um momento. A aplicação abrirá automaticamente em seu navegardor.
 
-**!! ATENÇÂO !!**
+**!! ATENÇÃO !!**
 
 Caso tente fazer alguma requisição no frontend antes de iniciar o backend. Uma mensagem de **erro 500** aparecerá.
